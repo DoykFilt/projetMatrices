@@ -30,7 +30,10 @@ public :
 	//Operateurs
 	CMatrice<MType> & operator*(MType MTValeur);
 	CMatrice<MType> & MType::operator*(MTMATMatrice);
-
+	CMatrice<MType> & operator*(CMatrice<MType> MTMATMatrice);
+	CMatrice<MType> & operator/(MType MTValeur);
+	CMatrice<MType> & operator+(CMatrice<MType> MTMATMatrice);
+	CMatrice<MType> & operator-(CMatrice<MType> MTMATMatrice);
 };
 
 #include "CMAtrice.cpp";
