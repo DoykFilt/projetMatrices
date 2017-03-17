@@ -44,7 +44,7 @@ CListeMatrice::~CListeMatrice()
 void CListeMatrice::LIMAjouterMatrice(CMatrice<MType> * pMTMATLIMMatrice) 
 {
 	uiLIMNombreMatrices++;
-	pMTMATLIMListe = (CMatrice<MType>*) realloc(uiLIMNombreMatrices*sizeof(CMatrice<MType>));
+	pMTMATLIMListe = (CMatrice<MType>*) realloc( uiLIMNombreMatrices * sizeof(CMatrice<MType>));
 
 }
 
