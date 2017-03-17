@@ -12,13 +12,13 @@ private :
 public :
 	//Constructeurs-Desctructeurs
 	CMatrice();
-	CMatrice(CMatrice<MType> MTMATMatrice);
+	CMatrice(const CMatrice<MType> & MTMATMatrice);
 	CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes);
 
 	~CMatrice();
 
 	//Methodes
-	CMatrice<MType> MTMATTransposeeMatrice() const;
+	CMatrice<MType> & MTMATTransposeeMatrice() const;
 	void MATAfficherMatrice() const;
 
 	//Accesseurs
@@ -29,11 +29,11 @@ public :
 
 	//Operateurs
 	CMatrice<MType> & operator*(MType MTValeur);
-	CMatrice<MType> & MType::operator*(MTMATMatrice);
-	CMatrice<MType> & operator*(CMatrice<MType> MTMATMatrice);
+	CMatrice<MType> & operator*(CMatrice<MType> const & MTMATMatrice);
 	CMatrice<MType> & operator/(MType MTValeur);
-	CMatrice<MType> & operator+(CMatrice<MType> MTMATMatrice);
-	CMatrice<MType> & operator-(CMatrice<MType> MTMATMatrice);
+	CMatrice<MType> & operator+(CMatrice<MType> const & MTMATMatrice);
+	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
+	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
 };
 
 #include "CMAtrice.cpp";
