@@ -1,7 +1,7 @@
 #include "CMatrice.h"
 #include "CException.h"
 
-CMatrice::CMatrice()
+template<class MType> CMatrice<MType>::CMatrice()
 {
 	uiMATnbLignes = 0;
 	uiMATnbColonnes = 0;
@@ -10,7 +10,7 @@ CMatrice::CMatrice()
 		throw new CException(2, "Allocation échouée");
 }
 
-CMatrice::CMatrice(CMatrice<MType> MTMATMatrice)
+template<class MType> CMatrice<MType>::CMatrice(const CMatrice<MType> & MTMATMatrice)
 {
 	unsigned int uiCompteurLignes;
 	unsigned int uiCompteurColonnes;
@@ -32,7 +32,7 @@ CMatrice::CMatrice(CMatrice<MType> MTMATMatrice)
 	}
 }
 
-CMatrice::CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes)
+template<class MType> CMatrice<MType>::CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes)
 {
 	unsigned int uiCompteurLignes;
 	unsigned int uiCompteurColonnes;
@@ -54,7 +54,7 @@ CMatrice::CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int u
 	}
 }
 
-CMatrice::~CMatrice()
+template<class MType> CMatrice<MType>::~CMatrice()
 {
 	unsigned int uiCompteurLignes;
 
@@ -64,64 +64,64 @@ CMatrice::~CMatrice()
 }
 
 //Methodes
-CMatrice::CMatrice<MType> MTMATTransposeeMatrice() const
+template<class MType> CMatrice<MType> & CMatrice<MType>::MTMATTransposeeMatrice() const
 {
 
 }
 
-CMatrice::void MATAfficherMatrice() const
+template<class MType> void CMatrice<MType>::MATAfficherMatrice() const
 {
 
 }
 
 //Accesseurs
-CMatrice::unsigned int MATgetNbLignes() const
+template<class MType> unsigned int CMatrice<MType>::MATgetNbLignes() const
 {
 
 }
 
-CMatrice::unsigned int MATgetNbColonnes() const
+template<class MType> unsigned int CMatrice<MType>::MATgetNbColonnes() const
 {
 
 }
 
-CMatrice::MType ** & MATgetMatrice() const
+template<class MType> MType ** & CMatrice<MType>::MATgetMatrice() const
 {
 
 }
 
-CMatrice::void MATsetMatrice(MType ** & MTMATMatrice, unsigned int uiLignes, unsigned int uiColonnes)
+template<class MType> void CMatrice<MType>::MATsetMatrice(MType ** & MTMATMatrice, unsigned int uiLignes, unsigned int uiColonnes)
 {
 
 }
 
 //Operateurs
-CMatrice::CMatrice<MType> & operator*(MType MTValeur)
+template<class MType> CMatrice<MType> & CMatrice<MType>::operator*(MType MTValeur)
 {
 
 }
 
-CMatrice::CMatrice<MType> & MType::operator*(MTMATMatrice)
+template<class MType> CMatrice<MType> & CMatrice<MType>::MType::operator*(MTMATMatrice)
 {
 
 }
 
-CMatrice::CMatrice<MType> & operator*(CMatrice<MType> MTMATMatrice)
+template<class MType> CMatrice<MType> & CMatrice<MType>::operator*(CMatrice<MType> MTMATMatrice)
 {
 
 }
 
-CMatrice::CMatrice<MType> & operator/(MType MTValeur)
+template<class MType> CMatrice<MType> & CMatrice::operator/(MType MTValeur)
 {
 
 }
 
-CMatrice::CMatrice<MType> & operator+(CMatrice<MType> MTMATMatrice)
+template<class MType> CMatrice<MType> & CMatrice::operator+(CMatrice<MType> MTMATMatrice)
 {
 
 }
 
-CMatrice::CMatrice<MType> & operator-(CMatrice<MType> MTMATMatrice)
+template<class MType> CMatrice<MType> & CMatrice::operator-(CMatrice<MType> MTMATMatrice)
 {
 
 }
