@@ -55,17 +55,23 @@ void CListeMatrice::LIMSupprimerMatrice(unsigned int uiIndex )
 
 CMatrice<MType> CListeMatrice::LIMSommeMatrices()
 {
+	
+	unsigned int uiBoucle;
+	CMatrice<MType> pMATMatriceSomme = new CMatrice();
+	for( uiBoucle =0; uiBoucle < uiLIMNombreMatrices; uiBoucle++)
+
 
 } 
 
 CMatrice<MType> CListeMatrice::LIMSommeAlterneeMatrices() 
 {
+	
 
 }
 
 CMatrice<MType> CListeMatrice::LIMSoustractionMatrices() 
 {
-
+	
 }
 
 CMatrice<MType> CListeMatrice::LIMMultiplicationMatrices() 
