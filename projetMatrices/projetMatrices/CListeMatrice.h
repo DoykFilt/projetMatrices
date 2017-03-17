@@ -11,12 +11,13 @@ class CListeMatrice
 		CMatrice<MType> *  pMTMATLIMListe;
 
 	public :
-		//constructeurs
+		//constructeurs et destructeur
 		CListeMatrice();
-		CListeMatrice(CListeMatrice LIMListe);
+		CListeMatrice(const CListeMatrice & LIMListe);
 		CListeMatrice(unsigned int uiLIMNBMatrices, CMatrice<MType> * pMTMATLIMMatrice);
 		~CListeMatrice();
 
+		//methodes
 		void LIMAjouterMatrice(CMatrice<MType> * pMTMATLIMMatrice);
 		void LIMSupprimerMatrice(unsigned int uiIndex);
 		CMatrice<MType> LIMSommeMatrices();

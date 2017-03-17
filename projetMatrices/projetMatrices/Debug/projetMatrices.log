@@ -1,9 +1,7 @@
-﻿La génération a démarré 17/03/2017 14:11:15.
-     1>Projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" sur le nœud 2 (Rebuild cible(s)).
+﻿La génération a démarré 17/03/2017 14:50:46.
+     1>Projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Cexception.cpp CListeMatrice.cpp projetMatrices.cpp stdafx.cpp
-         stdafx.cpp
-         projetMatrices.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt CListeMatrice.cpp
          CListeMatrice.cpp
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(15): error C2652: 'CMatrice<MType>' : constructeur de copie non conforme : le premier paramètre ne doit pas être 'CMatrice<MType>'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(37) : voir la référence à l'instanciation de la classe modèle 'CMatrice<MType>' en cours de compilation
@@ -134,14 +132,10 @@
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(127): warning C4508: 'operator -' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(11): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(16): error C2652: 'CListeMatrice' : constructeur de copie non conforme : le premier paramètre ne doit pas être 'CListeMatrice'
-                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(7) : voir la déclaration de 'CListeMatrice'
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(17): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(20): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
-                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(22): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(21): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(23): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
@@ -149,22 +143,31 @@
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
      1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(25): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(27): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(26): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
                  c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(3): error C2059: erreur de syntaxe : ')'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(4): error C2143: erreur de syntaxe : absence de ';' avant '{'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(4): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2146: erreur de syntaxe : absence de ')' avant l'identificateur 'LIMListe'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2146: erreur de syntaxe : absence de ';' avant l'identificateur 'LIMListe'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2059: erreur de syntaxe : ')'
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(12): error C2470: 'LIMListe' : similaire à une définition de fonction, mais aucune liste de paramètres ; corps apparent ignoré
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): error C2059: erreur de syntaxe : '('
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): error C3646: 'pMTMATLIMMatrices' : spécificateur de substitution inconnu
-     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): fatal error C1003: le nombre d'erreurs est supérieur à 100 ; arrêt de la compilation
-         Cexception.cpp
-         Génération de code en cours...
-     1>Génération du projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Rebuild cible(s)) -- ÉCHEC.
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(28): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(6): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(15): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(15): error C2027: utilisation du type non défini 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(20): error C2036: 'CMatrice *' : taille inconnue
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(20): error C2036: 'CMatrice *const ' : taille inconnue
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(20): error C2059: erreur de syntaxe : ')'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(24): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(28): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(28): error C2027: utilisation du type non défini 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(33): error C2036: 'CMatrice *' : taille inconnue
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(33): fatal error C1003: le nombre d'erreurs est supérieur à 100 ; arrêt de la compilation
+     1>Génération du projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
 
 ÉCHEC de la build.
 
-Temps écoulé 00:00:24.33
+Temps écoulé 00:00:22.92

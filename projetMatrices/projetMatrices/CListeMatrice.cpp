@@ -1,75 +1,84 @@
 #include "ClisteMatrice.h"
 
-CListeMatrice()
+CListeMatrice::CListeMatrice()
 {
-	uiNombreMatrices = 0;
+	uiLIMNombreMatrices = 0;
 	pMTMATLIMListe = (CMatrice<MType> * ) malloc (0);
 	if (pMTMATLIMListe = nullptr)
-		throw new CException(2, "allocation echouée");
+		throw new Cexception(2, "allocation echouée");
 }
 
-CListeMatrice(CListeMatrice LIMListe) 
+CListeMatrice::CListeMatrice(const CListeMatrice  & LIMListe) 
 {
 	unsigned int uiBoucle;
-	uiNombrematrices = LIMListe.uiNombreMatrices;
-	pMTMATLIMListe = (CMatrice<MType>*) malloc(uiNombrematrices*sizeof(CMatrice<MType>));
+	uiLIMNombreMatrices = LIMListe.uiLIMNombreMatrices;
+	pMTMATLIMListe = (CMatrice<MType>*) malloc(uiLIMNombreMatrices*sizeof(CMatrice<MType>));
 	if (pMTMATLIMListe = nullptr)
-		throw new CException(2, "allocation echouée");
+		throw new Cexception(2, "allocation echouée");
 
-	for( uiBoucle =0; uiBoucle < uiNombreMatrices; uiBoucle++)
+	for( uiBoucle =0; uiBoucle < uiLIMNombreMatrices; uiBoucle++)
 		pMTMATLIMListe[uiBoucle] = new CMatrice(LIMListe.pMTMATLIMListe[uiBoucle]);
 
 }
-CListeMatrice(unsigned int uiLIMNBMatrices, (CMatrice<MType> * ) pMTMATLIMMatrices ) 
-{
-	unsigned int uiBoucle;
-	uiNombreMatrices = uiLIMNBMatrices;
-	pMTMATLIMListe = (CMatrice<MType>*) malloc(uiNombrematrices*sizeof(CMatrice<MType>));
-	if (pMTMATLIMListe = nullptr)
-		throw new CException(2, "allocation echouée");
 
-	for( uiBoucle =0; uiBoucle < uiNombreMatrices; uiBoucle++)
-		pMTMATLIMListe[uiBoucle] = new CMatrice(pMTMATLIMMatrices[uiBoucle]);
-}
-~CListeMatrice()
+CListeMatrice::CListeMatrice(unsigned int uiLIMNBMatrices, CMatrice<MType> * pMTMATLIMMatrice) 
 {
 	unsigned int uiBoucle;
-	for( uiBoucle =0; uiBoucle < uiNombreMatrices; uiBoucle++)
+	uiLIMNombreMatrices = uiLIMNBMatrices;
+	pMTMATLIMListe = (CMatrice<MType>*) malloc(uiLIMNombreMatrices*sizeof(CMatrice<MType>));
+	if (pMTMATLIMListe = nullptr)
+		throw new Cexception(2, "allocation echouée");
+
+	for( uiBoucle =0; uiBoucle < uiLIMNombreMatrices; uiBoucle++)
+		pMTMATLIMListe[uiBoucle] = new CMatrice(pMTMATLIMListe[uiBoucle]);
+}
+
+CListeMatrice::~CListeMatrice()
+{
+	unsigned int uiBoucle;
+	for( uiBoucle =0; uiBoucle < uiLIMNombreMatrices; uiBoucle++)
 		delete pMTMATLIMListe[uiBoucle];
 	free(pMTMATLIMListe);
 } 
 
-void LIMAjouterMatrice(CMatrice<MType> * pMTMATLIMMatrice) 
+void CListeMatrice::LIMAjouterMatrice(CMatrice<MType> * pMTMATLIMMatrice) 
 {
-	uiNombreMatrices++;
-	pMTMATLIMListe = (CMatrice<MType>*) realloc(uiNombrematrices*sizeof(CMatrice<MType>));
+	uiLIMNombreMatrices++;
+	pMTMATLIMListe = (CMatrice<MType>*) realloc(uiLIMNombreMatrices*sizeof(CMatrice<MType>));
 
 }
-void LIMSupprimerMatrice(unsigned int uiIndex )
+
+void CListeMatrice::LIMSupprimerMatrice(unsigned int uiIndex )
 {
 
 } 
-CMatrice<MType> LIMSommeMatrices()
+
+CMatrice<MType> CListeMatrice::LIMSommeMatrices()
 {
 
 } 
-CMatrice<MType> LIMSommeAlterneeMatrices() 
+
+CMatrice<MType> CListeMatrice::LIMSommeAlterneeMatrices() 
 {
 
 }
-CMatrice<MType> LIMSoustractionMatrices() 
+
+CMatrice<MType> CListeMatrice::LIMSoustractionMatrices() 
 {
 
 }
-CMatrice<MType> LIMMultiplicationMatrices() 
+
+CMatrice<MType> CListeMatrice::LIMMultiplicationMatrices() 
 {
 
 }
-unsigned int LIMGetNbMatrices()
+
+unsigned int CListeMatrice::LIMGetNbMatrices()
 {
 
 } 
-CMatrice<MType>** LIMGetListeMatrices() 
+
+CMatrice<MType>** CListeMatrice::LIMGetListeMatrices() 
 {
 
 }
