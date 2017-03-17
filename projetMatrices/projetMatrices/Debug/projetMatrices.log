@@ -1,18 +1,170 @@
-﻿La génération a démarré 16/03/2017 18:37:33.
-     1>Projet "C:\Users\thiba\git_projects\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" sur le nœud 2 (Rebuild cible(s)).
+﻿La génération a démarré 17/03/2017 14:11:15.
+     1>Projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" sur le nœud 2 (Rebuild cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Cexception.cpp projetMatrices.cpp stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Cexception.cpp CListeMatrice.cpp projetMatrices.cpp stdafx.cpp
          stdafx.cpp
          projetMatrices.cpp
+         CListeMatrice.cpp
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(15): error C2652: 'CMatrice<MType>' : constructeur de copie non conforme : le premier paramètre ne doit pas être 'CMatrice<MType>'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(37) : voir la référence à l'instanciation de la classe modèle 'CMatrice<MType>' en cours de compilation
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(32): warning C4346: 'MType::*' : le nom dépendant n'est pas un type
+                 préfixer avec 'typename' pour indiquer un type
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(32): error C2061: erreur de syntaxe : identificateur 'MTMATMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(32): error C3254: 'CMatrice<MType>' : la classe contient une substitution explicite 'MType::*', mais ne dérive pas d'une interface qui contient la déclaration de fonction
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(32): error C2838: '*' : nom qualifié non conforme dans une déclaration de membre
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(39): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(4): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(5): error C2509: '{ctor}' : fonction membre non déclarée dans 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(13): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(13): error C2065: 'MType' : identificateur non déclaré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(13): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(14): error C2509: '{ctor}' : fonction membre non déclarée dans 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(35): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(35): error C2065: 'MType' : identificateur non déclaré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(35): error C2065: 'ppMTMatrice' : identificateur non déclaré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(35): error C2062: type 'unsigned int' inattendu
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(36): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(36): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(57): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(58): error C2509: '{dtor}' : fonction membre non déclarée dans 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2065: 'MType' : identificateur non déclaré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2146: erreur de syntaxe : absence de ';' avant l'identificateur 'MTMATTransposeeMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(68): error C2270: 'MTMATTransposeeMatrice' : modificateurs non autorisés sur les fonctions non membres
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(68): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(70): warning C4508: 'MTMATTransposeeMatrice' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(72): error C2589: 'void' : jeton non conforme à droite de '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(72): error C2059: erreur de syntaxe : '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(73): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(73): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(78): error C2589: 'unsigned' : jeton non conforme à droite de '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(78): error C2059: erreur de syntaxe : '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(79): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(79): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(83): error C2589: 'unsigned' : jeton non conforme à droite de '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(83): error C2059: erreur de syntaxe : '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(84): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(84): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88): error C2039: 'MType' : n'est pas membre de 'CMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88): error C2143: erreur de syntaxe : absence de ';' avant '*'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(89): error C2270: 'MATgetMatrice' : modificateurs non autorisés sur les fonctions non membres
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(89): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(91): warning C4508: 'MATgetMatrice' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(93): error C2589: 'void' : jeton non conforme à droite de '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(93): error C2059: erreur de syntaxe : '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(94): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(94): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2146: erreur de syntaxe : absence de ')' avant l'identificateur 'MTValeur'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99): error C2059: erreur de syntaxe : ')'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(100): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(100): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2825: 'MType' : doit être une classe ou un espace de noms lorsqu'il est suivi par '::'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2143: erreur de syntaxe : absence de ';' avant '*'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2040: 'MType' : les niveaux d'indirection de 'int &' et de 'int' sont différents
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2530: 'MType' : les références doivent être initialisées
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2065: 'MTMATMatrice' : identificateur non déclaré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(105): error C2448: '*' : l'initialiseur de style fonction semble être une définition de fonction
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(109): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(109): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(109): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(109): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(110): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(110): error C2365: '*' : redéfinition ; la précédente définition était 'variable de données'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(99) : voir la déclaration de '*'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(112): warning C4508: 'operator *' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2146: erreur de syntaxe : absence de ')' avant l'identificateur 'MTValeur'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(114): error C2059: erreur de syntaxe : ')'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(115): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(115): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(119): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(119): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(119): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(119): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(120): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(122): warning C4508: 'operator +' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(124): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(124): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(124): error C2143: erreur de syntaxe : absence de ';' avant '&'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(124): error C2761: '{ctor}' : redéclaration de la fonction membre non autorisée
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(125): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(127): warning C4508: 'operator -' : la fonction doit retourner une valeur ; type de retour 'void' pris par défaut
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(11): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(16): error C2652: 'CListeMatrice' : constructeur de copie non conforme : le premier paramètre ne doit pas être 'CListeMatrice'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(7) : voir la déclaration de 'CListeMatrice'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(17): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(20): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(22): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(23): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(24): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(25): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.h(27): error C2923: 'CMatrice' : 'MType' n'est pas un argument de type modèle valide pour le paramètre 'MType'
+                 c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(88) : voir la déclaration de 'MType'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(3): error C2059: erreur de syntaxe : ')'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(4): error C2143: erreur de syntaxe : absence de ';' avant '{'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(4): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2146: erreur de syntaxe : absence de ')' avant l'identificateur 'LIMListe'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2146: erreur de syntaxe : absence de ';' avant l'identificateur 'LIMListe'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(11): error C2059: erreur de syntaxe : ')'
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(12): error C2470: 'LIMListe' : similaire à une définition de fonction, mais aucune liste de paramètres ; corps apparent ignoré
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): error C2059: erreur de syntaxe : '('
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): error C3646: 'pMTMATLIMMatrices' : spécificateur de substitution inconnu
+     1>c:\users\camil\documents\cours\di3\projets\project_cpp\projetmatrices\projetmatrices\projetmatrices\clistematrice.cpp(23): fatal error C1003: le nombre d'erreurs est supérieur à 100 ; arrêt de la compilation
          Cexception.cpp
          Génération de code en cours...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.lib" /MACHINE:X86 Debug\Cexception.obj
-         Debug\projetMatrices.obj
-         Debug\stdafx.obj
-         projetMatrices.vcxproj -> C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.exe
-     1>Génération du projet "C:\Users\thiba\git_projects\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Rebuild cible(s)).
+     1>Génération du projet "C:\Users\camil\Documents\Cours\DI3\Projets\project_cpp\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Rebuild cible(s)) -- ÉCHEC.
 
-La génération a réussi.
+ÉCHEC de la build.
 
-Temps écoulé 00:00:00.98
+Temps écoulé 00:00:24.33
