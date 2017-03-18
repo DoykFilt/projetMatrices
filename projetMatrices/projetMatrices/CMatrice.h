@@ -14,6 +14,7 @@ public :
 	CMatrice();
 	CMatrice(const CMatrice<MType> & MTMATMatrice);
 	CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes);
+	CMatrice(unsigned int uiLignes, unsigned int uiColonnes); // Créer une matrice vide de taille uiLignes*uiColonnes
 
 	~CMatrice();
 
@@ -24,8 +25,7 @@ public :
 	//Accesseurs
 	unsigned int MATgetNbLignes() const;
 	unsigned int MATgetNbColonnes() const;
-	MType ** & MATgetMatrice() const;
-	void MATsetMatrice(MType ** & MTMATMatrice, unsigned int uiLignes, unsigned int uiColonnes);
+	void MATsetMatrice(const MType ** MTMATMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
 
 	//Operateurs
 	CMatrice<MType> & operator*(MType MTValeur);

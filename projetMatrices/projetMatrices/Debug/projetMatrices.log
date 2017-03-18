@@ -1,62 +1,19 @@
-﻿La génération a démarré 17/03/2017 15:14:12.
+﻿La génération a démarré 18/03/2017 14:50:53.
      1>Projet "C:\Users\thiba\git_projects\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" sur le nœud 2 (Rebuild cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Cexception.cpp CListeMatrice.cpp projetMatrices.cpp stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Cexception.cpp projetMatrices.cpp stdafx.cpp
          stdafx.cpp
          projetMatrices.cpp
-         CListeMatrice.cpp
      1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(39): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(67): error C2955: 'CMatrice' : l'utilisation d'une classe modèle requiert une liste d'arguments modèle
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(5) : voir la déclaration de 'CMatrice'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(70): error C2244: 'CMatrice<MType>::MTMATTransposeeMatrice' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(21) : voir la déclaration de 'CMatrice<MType>::MTMATTransposeeMatrice'
-                 définition
-                 'CMatrice<MType> &CMatrice::MTMATTransposeeMatrice(void) const'
-                 déclarations existantes
-                 'CMatrice<MType> &CMatrice<MType>::MTMATTransposeeMatrice(void) const'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(75): error C2244: 'CMatrice<MType>::MATAfficherMatrice' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(22) : voir la déclaration de 'CMatrice<MType>::MATAfficherMatrice'
-                 définition
-                 'void CMatrice::MATAfficherMatrice(void) const'
-                 déclarations existantes
-                 'void CMatrice<MType>::MATAfficherMatrice(void) const'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(81): error C2244: 'CMatrice<MType>::MATgetNbLignes' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(25) : voir la déclaration de 'CMatrice<MType>::MATgetNbLignes'
-                 définition
-                 'unsigned int CMatrice::MATgetNbLignes(void) const'
-                 déclarations existantes
-                 'unsigned int CMatrice<MType>::MATgetNbLignes(void) const'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(86): error C2244: 'CMatrice<MType>::MATgetNbColonnes' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(26) : voir la déclaration de 'CMatrice<MType>::MATgetNbColonnes'
-                 définition
-                 'unsigned int CMatrice::MATgetNbColonnes(void) const'
-                 déclarations existantes
-                 'unsigned int CMatrice<MType>::MATgetNbColonnes(void) const'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(91): error C2244: 'CMatrice<MType>::MATgetMatrice' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(27) : voir la déclaration de 'CMatrice<MType>::MATgetMatrice'
-                 définition
-                 'MType **&CMatrice::MATgetMatrice(void) const'
-                 déclarations existantes
-                 'MType **&CMatrice<MType>::MATgetMatrice(void) const'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(96): error C2244: 'CMatrice<MType>::MATsetMatrice' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.h(28) : voir la déclaration de 'CMatrice<MType>::MATsetMatrice'
-                 définition
-                 'void CMatrice::MATsetMatrice(MType **&,unsigned int,unsigned int)'
-                 déclarations existantes
-                 'void CMatrice<MType>::MATsetMatrice(MType **&,unsigned int,unsigned int)'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(102): error C2244: 'CMatrice<MType>::operator *' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-                 définition
-                 'CMatrice<MType> &CMatrice::operator *(MType)'
-                 déclarations existantes
-                 'CMatrice<MType> &CMatrice<MType>::operator *(const CMatrice<MType> &)'
-                 'CMatrice<MType> &CMatrice<MType>::operator *(MType)'
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C3083: 'MType' : le symbole situé à gauche de '::' doit être un type
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2065: 'MTMATMatrice' : identificateur non déclaré
-     1>c:\users\thiba\git_projects\projetmatrices\projetmatrices\projetmatrices\cmatrice.cpp(104): error C2350: 'CMatrice<MType>::operator *' n'est pas un membre static
          Cexception.cpp
          Génération de code en cours...
-     1>Génération du projet "C:\Users\thiba\git_projects\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Rebuild cible(s)) -- ÉCHEC.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.lib" /MACHINE:X86 Debug\Cexception.obj
+         Debug\projetMatrices.obj
+         Debug\stdafx.obj
+         projetMatrices.vcxproj -> C:\Users\thiba\git_projects\projetMatrices\projetMatrices\Debug\projetMatrices.exe
+     1>Génération du projet "C:\Users\thiba\git_projects\projetMatrices\projetMatrices\projetMatrices\projetMatrices.vcxproj" terminée (Rebuild cible(s)).
 
-ÉCHEC de la build.
+La génération a réussi.
 
-Temps écoulé 00:00:01.04
+Temps écoulé 00:00:01.29

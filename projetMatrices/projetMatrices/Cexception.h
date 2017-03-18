@@ -28,7 +28,6 @@ public :
 	void EXCModifier_Valeur(unsigned int uiValeur);
 	string EXCLire_Message() const;
 	void EXCModifier_Message(string sMessage);
-
 };
 
 #endif
