@@ -14,7 +14,7 @@ class CListeMatrice
 		//constructeurs et destructeur
 		CListeMatrice();
 		CListeMatrice(const CListeMatrice & LIMListe);
-		CListeMatrice(unsigned int uiLIMNBMatrices, CMatrice<MType> * pMTMATLIMMatrice);
+		CListeMatrice(unsigned int uiLIMNBMatrices, CMatrice<MType> * pMTLIMMatrice);
 		~CListeMatrice();
 
 		//methodes
@@ -24,7 +24,9 @@ class CListeMatrice
 		CMatrice<MType> LIMSommeAlterneeMatrices();
 		CMatrice<MType> LIMSoustractionMatrices();
 		CMatrice<MType> LIMMultiplicationMatrices();
-		unsigned int LIMGetNbMatrices();
+		
+		//Accesseurs
+		unsigned int LIMGetNbMatrices(); // mettre inline ?
 		CMatrice<MType>** LIMGetListeMatrices();
 
 };
