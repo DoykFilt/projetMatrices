@@ -11,21 +11,32 @@ Constructeur par défaut
 Cexception::Cexception()
 {
 	uiEXCValeur = ERREUR_DEFAUT;
-	sEXCMessage = MESSAGE_DEFAUT;
+	pcEXCMessage = MESSAGE_DEFAUT;
+	pcEXCMessageDetail = MESSAGE_SUPP_DEFAUT;
 }
 
 /******************************************************************************
-Constructeur à 2 arguments
+Constructeur à 1 argument
 *******************************************************************************
 Entrée : La valeur et le message associé.
 Necessité : Néant
 Sortie : Rien
 Entraine : L'objet en cours est initialisé.
 ******************************************************************************/
-Cexception::Cexception(unsigned int uiValeur, string sMessage)
+Cexception::Cexception(unsigned int uiValeur)
 {
 	uiEXCValeur = uiValeur;
-	sEXCMessage = sMessage;
+	switch(uiEXCValeur)
+	{
+		case 1 : pcEXCMessage = MESSAGE_ALLOCATION;
+			break;
+		case 2 : pcEXCMessage = MESSAGE_REALLOCATION;
+			break;
+		case 3 : pcEXCMessage = MESSAGE_TAILLE_MATRICE;
+			break;
+		default : pcEXCMessage = MESSAGE_DEFAUT;
+	}
+	pcEXCMessageDetail = MESSAGE_SUPP_DEFAUT;
 }
 
 /******************************************************************************
@@ -39,7 +50,8 @@ Entraine : Création d'un objet par recopie.
 Cexception::Cexception(const Cexception & EXCObjet)
 {
 	uiEXCValeur = EXCObjet.uiEXCValeur;
-	sEXCMessage =EXCObjet.sEXCMessage;
+	pcEXCMessage =EXCObjet.pcEXCMessage;
+	pcEXCMessageDetail =EXCObjet.pcEXCMessageDetail;
 }
 
 /******************************************************************************
@@ -77,6 +89,16 @@ Entraine : Modification de la valeur.
 inline void Cexception::EXCModifier_Valeur(unsigned int uiValeur)
 {
 	uiEXCValeur = uiValeur;
+	switch(uiEXCValeur)
+	{
+		case 1 : pcEXCMessage = MESSAGE_ALLOCATION;
+			break;
+		case 2 : pcEXCMessage = MESSAGE_REALLOCATION;
+			break;
+		case 3 : pcEXCMessage = MESSAGE_TAILLE_MATRICE;
+			break;
+		default : pcEXCMessage = MESSAGE_DEFAUT;
+	}
 }
 
 /******************************************************************************
@@ -87,9 +109,9 @@ Necessité : Néant
 Sortie : Valeur
 Entraine : Retourne la valeur.
 ******************************************************************************/
-inline string Cexception::EXCLire_Message() const
+inline char * Cexception::EXCLire_Message() const
 {
-	return sEXCMessage;
+	return pcEXCMessage; // concaténation du message supp
 }
 
 /******************************************************************************
@@ -100,7 +122,7 @@ Necessité : Néant
 Sortie : Rien
 Entraine : Modification du message.
 ******************************************************************************/
-inline void Cexception::EXCModifier_Message(string sMessage)
+inline void Cexception::EXCModifier_Message(char * pcMessage)
 {
-	sEXCMessage = sMessage;
+	pcEXCMessageDetail = pcMessage;
 }

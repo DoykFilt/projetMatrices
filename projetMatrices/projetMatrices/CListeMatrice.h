@@ -7,7 +7,7 @@ class CListeMatrice
 {
 	private :
 		//attributs
-		unsigned int uiLIMNombreMatrices;
+		unsigned int uiLIMNbMatrices;
 		CMatrice<MType> *  pMTMATLIMListe;
 
 	public :
@@ -26,7 +26,7 @@ class CListeMatrice
 		CMatrice<MType> LIMMultiplicationMatrices();
 		
 		//Accesseurs
-		unsigned int LIMGetNbMatrices(); // mettre inline ?
+		unsigned int LIMGetNbMatrices(); 
 		CMatrice<MType>** LIMGetListeMatrices();
 
 };
