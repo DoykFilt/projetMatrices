@@ -25,14 +25,11 @@ public :
 	//Accesseurs
 	unsigned int MATgetNbLignes() const;
 	unsigned int MATgetNbColonnes() const;
+	MType MATget(unsigned int uiLigne, unsigned int uiColonne);
+	MType MATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur);
 	void MATsetMatrice(const MType ** MTMATMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
 
 	//Operateurs
-	CMatrice<MType> & operator*(MType MTValeur);
-	CMatrice<MType> & operator*(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator/(MType MTValeur);
-	CMatrice<MType> & operator+(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
 	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
 };
 

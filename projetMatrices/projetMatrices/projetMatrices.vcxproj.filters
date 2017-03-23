@@ -47,7 +47,14 @@
     <ClCompile Include="CMatrice.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="projetMatricesMauvaiseVersion.cpp">
+=======
+    <ClCompile Include="OperatorSurcharges.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="parseur.cpp">
+>>>>>>> RÃ©ajustement des surcharges d'opÃ©rateur Cmatrice + dÃ©but parseur
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
