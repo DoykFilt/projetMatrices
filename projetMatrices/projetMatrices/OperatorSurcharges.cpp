@@ -1,4 +1,6 @@
-template<class MType1, class MType2> CMatrice<MType1> & operator*(CMatrice<MType1> const & MTMATMatrice, MType2 MTValeur)
+#include "CMatrice.h"
+
+template<typename MType1, typename MType2> CMatrice<MType1> & operator* (CMatrice<MType1> const & MTMATMatrice, MType2 MTValeur)
 {
 	unsigned int uiCompteurLignes, uiCompteursColonnes;
 
@@ -24,7 +26,7 @@ template<class MType1, class MType2> CMatrice<MType1> & operator*(MType2 MTValeu
 	return *MTMATNewMatrice;
 }
 
-template<class MType1, class Mtype2> CMatrice<MType1> & operator*(CMatrice<MType1> const & MTMATMatrice1, CMatrice<MType2> const & MTMATMatrice2)
+template<class MType1, class MType2> CMatrice<MType1> & operator*(CMatrice<MType1> const & MTMATMatrice1, CMatrice<MType2> const & MTMATMatrice2)
 {
 	unsigned int uiCompteurLignesMAT1, uiCompteurColonnesMAT2;
 	unsigned int uiCompteurOperation;
@@ -85,7 +87,7 @@ template<class MType1, class MType2> CMatrice<MType1> & operator+(CMatrice<MType
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATMAtrice1.MATgetLignes(); uiCompteurLignes++)
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < MTMATMAtrice1.MATgetColonnes(); uiCompteurColonnes++)
-			MTMATNewMatrice->MATset(uiCompteurLignes, uiCompteurColonnes, MTMATMatrice1.MATget(uiCompteurLignes, uiCompteurColonnes) + MTMATMatrice2.MATget(uiCompteurLignes, uiCompteurColonnes);
+			MTMATNewMatrice->MATset(uiCompteurLignes, uiCompteurColonnes, MTMATMatrice1.MATget(uiCompteurLignes, uiCompteurColonnes) + MTMATMatrice2.MATget(uiCompteurLignes, uiCompteurColonnes));
 
 	return *MTMATNewMatrice;
 }
@@ -101,7 +103,7 @@ template<class MType1, class MType2> CMatrice<MType1> & operator-(CMatrice<MType
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATMAtrice1.MATgetLignes(); uiCompteurLignes++)
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < MTMATMAtrice1.MATgetColonnes(); uiCompteurColonnes++)
-			MTMATNewMatrice->MATset(uiCompteurLignes, uiCompteurColonnes, MTMATMatrice1.MATget(uiCompteurLignes, uiCompteurColonnes) - MTMATMatrice2.MATget(uiCompteurLignes, uiCompteurColonnes);
+			MTMATNewMatrice->MATset(uiCompteurLignes, uiCompteurColonnes, MTMATMatrice1.MATget(uiCompteurLignes, uiCompteurColonnes) - MTMATMatrice2.MATget(uiCompteurLignes, uiCompteurColonnes));
 
 	return *MTMATNewMatrice;
 }

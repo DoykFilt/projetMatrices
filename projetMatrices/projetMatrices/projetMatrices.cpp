@@ -15,7 +15,7 @@ void main()
 		CMatrice<char> * MATIntMatriceA = new CMatrice<char>();
 
 		cout<<"Matrice 1 (constructeur vide):\n";
-		MATIntMatrice1->MATAfficherMatrice();
+		MATIntMatrice1->MTMATAfficherMatrice();
 
 		int** ppiMat = (int **) malloc(sizeof(int) * 2);
 		ppiMat[0] = (int *)malloc(sizeof(int) * 6);
@@ -27,24 +27,24 @@ void main()
 	
 		CMatrice<int> * MATIntMatrice2 = new CMatrice<int>(ppiMat, 2, 6);
 		cout<<"Matrice 2 (constructeur de confort):\n";
-		MATIntMatrice2->MATAfficherMatrice();
+		MATIntMatrice2->MTMATAfficherMatrice();
 		
 		CMatrice<int> * MATIntMatrice3 = new CMatrice<int>(*MATIntMatrice2);
 		cout<<"Matrice 3 (constructeur de recopie):\n";
-		MATIntMatrice3->MATAfficherMatrice();
+		MATIntMatrice3->MTMATAfficherMatrice();
 		
 		cout<<"Transposee de la matrice 3:\n";
-		MATIntMatrice3->MTMATTransposeeMatrice().MATAfficherMatrice();
+		MATIntMatrice3->MTMATTransposeeMatrice().MTMATAfficherMatrice();
 
 		cout<<"Matrice 4 (Multiplication de la matrice 3 par 4):\n";
 		CMatrice<int> * MATIntMatrice4 = &(*MATIntMatrice3 * 4);
-		MATIntMatrice4->MATAfficherMatrice();
+		MATIntMatrice4->MTMATAfficherMatrice();
 		
 		delete MATIntMatrice4;
 		
 		cout<<"Matrice 4 (Multiplication de 4 par la matrice 3):\n";
 		MATIntMatrice4 = &(4 * *MATIntMatrice3);
-		MATIntMatrice4->MATAfficherMatrice();
+		MATIntMatrice4->MTMATAfficherMatrice();
 		
 		/*cout<<"Multiplication de la matrice 3 par 4:\n";
 		(4 * *MATIntMatrice3).MATAfficherMatrice();*/
@@ -54,11 +54,11 @@ void main()
 
 		cout<<"Addition de la matrice 3 avec elle-même: \n";
 		*MATIntMatrice4 = *MATIntMatrice3 + *MATIntMatrice3;
-		MATIntMatrice4->MATAfficherMatrice();
+		MATIntMatrice4->MTMATAfficherMatrice();
 		cout<<"Puis soustraction avec sa première moitié :\n";
 		*MATIntMatrice4 = *MATIntMatrice4 - *MATIntMatrice3 / 2;
-		MATIntMatrice4->MATAfficherMatrice();
-		MATIntMatrice3->MATAfficherMatrice();
+		MATIntMatrice4->MTMATAfficherMatrice();
+		MATIntMatrice3->MTMATAfficherMatrice();
 
 		char** ppcMat = (char **) malloc(sizeof(char) * 2);
 		ppcMat[0] = (char *)malloc(sizeof(char) * 6);
@@ -70,7 +70,7 @@ void main()
 		
 		CMatrice<char> * MATIntMatriceA = new CMatrice<char>(ppcMat, 2, 6);
 		cout<<"Matrice A (constructeur de confort):\n";
-		MATIntMatriceA->MATAfficherMatrice();
+		MATIntMatriceA->MTMATAfficherMatrice();
 		
 		cout<<"Addition de la matrice A avec la matrice 1: \n";
 		(*MATIntMatriceA + *MATIntMatrice1).MATAfficherMatrice();
