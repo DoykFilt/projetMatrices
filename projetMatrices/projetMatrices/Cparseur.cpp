@@ -15,16 +15,16 @@ Entraine : L'objet a été initialisé
 ******************************************************************************/
 Cparseur::Cparseur()
 {	
-	pctabBalisesValeurs[0][0] = _strdup(TYPEMATRICE);
-	pctabBalisesValeurs[0][1] = nullptr;
-	pctabBalisesValeurs[1][0] = _strdup(NBLIGNES);
-	pctabBalisesValeurs[1][1] = nullptr;
-	pctabBalisesValeurs[2][0] = _strdup(NBCOLONNES);
-	pctabBalisesValeurs[2][1] = nullptr;
-	pctabBalisesValeurs[3][0] = _strdup(MATRICE);
-	pctabBalisesValeurs[3][1] = nullptr;
+	pcPARtabBalisesValeurs[0][0] = _strdup(TYPEMATRICE);
+	pcPARtabBalisesValeurs[0][1] = nullptr;
+	pcPARtabBalisesValeurs[1][0] = _strdup(NBLIGNES);
+	pcPARtabBalisesValeurs[1][1] = nullptr;
+	pcPARtabBalisesValeurs[2][0] = _strdup(NBCOLONNES);
+	pcPARtabBalisesValeurs[2][1] = nullptr;
+	pcPARtabBalisesValeurs[3][0] = _strdup(MATRICE);
+	pcPARtabBalisesValeurs[3][1] = nullptr;
 
-	pcType = nullptr;
+	pcPARType = nullptr;
 }
 
 /******************************************************************************
@@ -37,16 +37,16 @@ Entraine : L'objet a été initialisé par recopie de l'objet en paramètre
 ******************************************************************************/
 Cparseur::Cparseur(Cparseur & PARObjet)
 {	
-	pctabBalisesValeurs[0][0] = _strdup(PARObjet.pctabBalisesValeurs[0][0]);
-	pctabBalisesValeurs[0][1] = _strdup(PARObjet.pctabBalisesValeurs[0][1]);
-	pctabBalisesValeurs[1][0] = _strdup(PARObjet.pctabBalisesValeurs[1][0]);
-	pctabBalisesValeurs[1][1] = _strdup(PARObjet.pctabBalisesValeurs[1][1]);
-	pctabBalisesValeurs[2][0] = _strdup(PARObjet.pctabBalisesValeurs[2][0]);
-	pctabBalisesValeurs[2][1] = _strdup(PARObjet.pctabBalisesValeurs[2][1]);
-	pctabBalisesValeurs[3][0] = _strdup(PARObjet.pctabBalisesValeurs[3][0]);
-	pctabBalisesValeurs[3][1] = _strdup(PARObjet.pctabBalisesValeurs[3][1]);
+	pcPARtabBalisesValeurs[0][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[0][0]);
+	pcPARtabBalisesValeurs[0][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[0][1]);
+	pcPARtabBalisesValeurs[1][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[1][0]);
+	pcPARtabBalisesValeurs[1][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[1][1]);
+	pcPARtabBalisesValeurs[2][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[2][0]);
+	pcPARtabBalisesValeurs[2][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[2][1]);
+	pcPARtabBalisesValeurs[3][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[3][0]);
+	pcPARtabBalisesValeurs[3][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[3][1]);
 
-	pcType = _strdup(PARObjet.pcType);
+	pcPARType = _strdup(PARObjet.pcPARType);
 }
 
 /******************************************************************************
@@ -59,16 +59,16 @@ Entraine : L'espace alloué pour les attributs de l'objet a été libéré
 ******************************************************************************/
 Cparseur::~Cparseur()
 {
-	free(pctabBalisesValeurs[0][0]);
-	free(pctabBalisesValeurs[0][1]);
-	free(pctabBalisesValeurs[1][0]);
-	free(pctabBalisesValeurs[1][1]);
-	free(pctabBalisesValeurs[2][0]);
-	free(pctabBalisesValeurs[2][1]);
-	free(pctabBalisesValeurs[3][0]);
-	free(pctabBalisesValeurs[3][1]);
+	free(pcPARtabBalisesValeurs[0][0]);
+	free(pcPARtabBalisesValeurs[0][1]);
+	free(pcPARtabBalisesValeurs[1][0]);
+	free(pcPARtabBalisesValeurs[1][1]);
+	free(pcPARtabBalisesValeurs[2][0]);
+	free(pcPARtabBalisesValeurs[2][1]);
+	free(pcPARtabBalisesValeurs[3][0]);
+	free(pcPARtabBalisesValeurs[3][1]);
 
-	free(pcType);
+	free(pcPARType);
 }
 
 /******************************************************************************
@@ -112,31 +112,31 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 		pcTemp = pcLigne;//pour pouvoir manipuler la chaîne
 
 		//On cherche la première balise sur la ligne : TYPEMATRICE
-		pcTemp = strstr(pcLigne, pctabBalisesValeurs[0][0]);
+		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[0][0]);
 		if(pcTemp != nullptr)
 		{
-			pctabBalisesValeurs[0][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pctabBalisesValeurs[0][0], pctabBalisesValeurs[0][1], pcTemp); // et on l'efface du tampon
+			pcPARtabBalisesValeurs[0][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pcPARtabBalisesValeurs[0][0], pcPARtabBalisesValeurs[0][1], pcTemp); // et on l'efface du tampon
 		}
 		
 		//On cherche la deuxième balise sur la même ligne : NBLIGNES
-		pcTemp = strstr(pcLigne, pctabBalisesValeurs[1][0]);
+		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[1][0]);
 		if(pcTemp!= nullptr)
 		{
-			pctabBalisesValeurs[1][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pctabBalisesValeurs[1][0], pctabBalisesValeurs[1][1], pcTemp); // et on l'efface du tampon
+			pcPARtabBalisesValeurs[1][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pcPARtabBalisesValeurs[1][0], pcPARtabBalisesValeurs[1][1], pcTemp); // et on l'efface du tampon
 		}
 		
 		//On cherche la troisième balise sur la même ligne : NBCOLONNES
-		pcTemp = strstr(pcLigne, pctabBalisesValeurs[2][0]);
+		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[2][0]);
 		if(pcTemp != nullptr)
 		{
-			pctabBalisesValeurs[2][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pctabBalisesValeurs[2][0], pctabBalisesValeurs[2][1], pcTemp); // et on l'efface du tampon
+			pcPARtabBalisesValeurs[2][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pcPARtabBalisesValeurs[2][0], pcPARtabBalisesValeurs[2][1], pcTemp); // et on l'efface du tampon
 		}
 		
 		//Puis on cherche la matrice : MATRICE
-		pcTemp = strstr(pcLigne, pctabBalisesValeurs[3][0]);
+		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[3][0]);
 		if(pcTemp != nullptr)
 		{
 			//On avance jusqu'au '['
@@ -183,7 +183,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 				}
 			}
 			pcTempMat[uiCompteurpcTempMat] = '\0';
-			pctabBalisesValeurs[3][1] = _strdup(pcTempMat);
+			pcPARtabBalisesValeurs[3][1] = _strdup(pcTempMat);
 		}
 	}
 
@@ -191,12 +191,12 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 	//Puis test si tout a bien été récupéré
 	for(uiCompteur = 0; uiCompteur < NBRBALISES; uiCompteur++)
 	{
-		if(pctabBalisesValeurs[uiCompteur][1] == nullptr)
+		if(pcPARtabBalisesValeurs[uiCompteur][1] == nullptr)
 			throw Cexception(6, "Fin du fichier , toute les informations n'ont pas été renseignées");
 	}
 		
 	//et on essaie de reconnaitre le type
-	PARreconnaitreType(pctabBalisesValeurs[0][1]);
+	PARreconnaitreType(pcPARtabBalisesValeurs[0][1]);
 
 	//Pour finalement fermer le fichier et libérer les variables intermédiaires
 	fichier.close();
@@ -220,18 +220,18 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 	CMatrice<double> * dMATMatrice;
 	
 	//Cette fonction ne peut retourner qu'une matrice de type double
-	if(strcmp(pcType, DOUBLE) != 0)
+	if(strcmp(pcPARType, DOUBLE) != 0)
 		return nullptr;
 
 
-	uiNbrLignes = PARreconnaitreTaille(pctabBalisesValeurs[1][1]);
-	uiNbrColonnes = PARreconnaitreTaille(pctabBalisesValeurs[2][1]);
+	uiNbrLignes = PARreconnaitreTaille(pcPARtabBalisesValeurs[1][1]);
+	uiNbrColonnes = PARreconnaitreTaille(pcPARtabBalisesValeurs[2][1]);
 
 	ppdMatrice = new double*[uiNbrLignes];
 	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
 		ppdMatrice[uiCptrLignes] = new double[uiNbrColonnes];
 
-	ppdMatrice[0][0] = strtod(pctabBalisesValeurs[3][1], &pcEnd);
+	ppdMatrice[0][0] = strtod(pcPARtabBalisesValeurs[3][1], &pcEnd);
 	uiCptrColonnes = 1;
 
 	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
@@ -264,22 +264,22 @@ void Cparseur::PARreconnaitreType(char * pcElm)
 {
 	_strupr_s(pcElm, strlen(pcElm) + 1);
 	if(strcmp(pcElm, DOUBLE) == 0)
-		pcType= _strdup(DOUBLE);
+		pcPARType= _strdup(DOUBLE);
 	else if(strcmp(pcElm, INTEGER) == 0)
-		pcType = _strdup(INTEGER);
+		pcPARType = _strdup(INTEGER);
 	else if(strcmp(pcElm, FLOAT) == 0)
-		pcType = _strdup(FLOAT);
+		pcPARType = _strdup(FLOAT);
 	else if(strcmp(pcElm, CHARACTER) == 0)
-		pcType = _strdup(CHARACTER);
+		pcPARType = _strdup(CHARACTER);
 	else
-		pcType = nullptr;
+		pcPARType = nullptr;
 	
-	if(pcType == nullptr || strcmp(pcType, DOUBLE) != 0)
+	if(pcPARType == nullptr || strcmp(pcPARType, DOUBLE) != 0)
 	{
 		throw Cexception(6, "Type inconnu (cette version ne prend en compte que le type Double)");
 	}
 
-	pctabBalisesValeurs[0][1] = _strdup(pcType);
+	pcPARtabBalisesValeurs[0][1] = _strdup(pcPARType);
 }
 
 /******************************************************************************
@@ -290,9 +290,9 @@ Necessité : Néant
 Sortie : Retourne la valeur non modifiable du type de la dernière matrice nulle
 Entraine : L'objet a été initialisé
 ******************************************************************************/
-const char * Cparseur::PARgetType()
+inline const char * Cparseur::PARgetType()
 {
-	return (const char *)pcType;
+	return (const char *)pcPARType;
 }
 
 /******************************************************************************

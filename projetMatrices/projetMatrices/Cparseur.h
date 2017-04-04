@@ -23,8 +23,8 @@ class Cparseur
 	brut à l'aide de balises et d'en sortir une matrice
 
 	Attributs
-		pcType : Le type de matrice détecté
-		pctabBalisesValeurs : Les données brutes relevées du fichier, chaque
+		pcPARType : Le type de matrice détecté
+		pcPARtabBalisesValeurs : Les données brutes relevées du fichier, chaque
 			ligne correspond à une balise : la première colonne le nom de la 
 			balise et la seconde sa valeur détecté
 
@@ -33,8 +33,8 @@ class Cparseur
 class Cparseur
 {
 private :
-	char * pcType;
-	char * pctabBalisesValeurs[NBRBALISES][2];
+	char * pcPARType;
+	char * pcPARtabBalisesValeurs[NBRBALISES][2];
 
 public :
 	//Constructeurs et destructeurs

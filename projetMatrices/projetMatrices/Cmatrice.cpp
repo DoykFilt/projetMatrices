@@ -191,7 +191,7 @@ MTMATgetNbLignes
 	Sortie : naturel
 	Entraine : Retourne le nombre de lignes de la matrice
 ******************************************************************************/
-template<class MType> unsigned int CMatrice<MType>::MTMATgetNbLignes() const
+template<class MType> inline unsigned int CMatrice<MType>::MTMATgetNbLignes() const
 {
 	return uiMATnbLignes;
 }
@@ -204,7 +204,7 @@ MTMATgetNbColonnes
 	Sortie : naturel
 	Entraine : Retourne le nombre de colonnes de la matrice
 ******************************************************************************/
-template<class MType> unsigned int CMatrice<MType>::MTMATgetNbColonnes() const
+template<class MType> inline unsigned int CMatrice<MType>::MTMATgetNbColonnes() const
 {
 	return uiMATnbColonnes;
 }
@@ -217,7 +217,7 @@ MTMATget
 	Sortie : MType
 	Entraine : Retourne l'élément de la matrice à la ligne uiLigne et à la colonne uiColonne
 ******************************************************************************/
-template<class MType> MType CMatrice<MType>::MTMATget(unsigned int uiLigne, unsigned int uiColonne)
+template<class MType> inline MType CMatrice<MType>::MTMATget(unsigned int uiLigne, unsigned int uiColonne) const
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
 		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATget)");
@@ -233,7 +233,7 @@ MTMATset
 	Sortie : Rien
 	Entraine : L'élément à la position uiLigne, uiColonnes a été remplacé
 ******************************************************************************/
-template<class MType> MType CMatrice<MType>::MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur)
+template<class MType> inline void CMatrice<MType>::MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur)
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
 		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATset)");
@@ -249,7 +249,7 @@ MTMATsetMatrice
 	Sortie : Rien
 	Entraine : Les attributs de l'objet ont été remplacés
 ******************************************************************************/
-template<class MType> void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTMatrice, const unsigned int uiLignes, const unsigned int uiColonnes)
+template<class MType> inline void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTMatrice, const unsigned int uiLignes, const unsigned int uiColonnes)
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 

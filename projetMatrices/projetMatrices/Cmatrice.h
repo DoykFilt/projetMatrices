@@ -38,9 +38,9 @@ public :
 	//Accesseurs
 	unsigned int MTMATgetNbLignes() const;
 	unsigned int MTMATgetNbColonnes() const;
-	MType MTMATget(unsigned int uiLigne, unsigned int uiColonne);
-	MType MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur);
-	void MTMATsetMatrice(const MType ** MTMATMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
+	MType MTMATget(unsigned int uiLigne, unsigned int uiColonne) const;
+	void MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur);
+	void MTMATsetMatrice(const MType ** ppMTMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
 
 	//Surcharges d'operateurs
 	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
