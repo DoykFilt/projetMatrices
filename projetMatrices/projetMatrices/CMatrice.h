@@ -30,6 +30,11 @@ public :
 
 	//Surcharges d'operateurs
 	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
+	CMatrice<MType> & operator*(MType MTValeur);
+	CMatrice<MType> & operator*(CMatrice<MType> const & MTMATMatrice);
+	CMatrice<MType> & operator/(MType MTValeur);
+	CMatrice<MType> & operator+(CMatrice<MType> const & MTMATMatrice);
+	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
 };
 
 #include "CMAtrice.cpp";
