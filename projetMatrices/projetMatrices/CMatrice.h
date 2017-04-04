@@ -10,29 +10,25 @@ private :
 	MType ** ppMTMATMatrice;
 
 public :
-	//Constructeurs-Desctructeurs
+	//Constructeurs-Destructeurs
 	CMatrice();
 	CMatrice(const CMatrice<MType> & MTMATMatrice);
 	CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes);
 	CMatrice(unsigned int uiLignes, unsigned int uiColonnes); // Créer une matrice vide de taille uiLignes*uiColonnes
-
 	~CMatrice();
 
 	//Methodes
 	CMatrice<MType> & MTMATTransposeeMatrice() const;
-	void MATAfficherMatrice() const;
+	void MTMATAfficherMatrice() const;
 
 	//Accesseurs
-	unsigned int MATgetNbLignes() const;
-	unsigned int MATgetNbColonnes() const;
-	void MATsetMatrice(const MType ** MTMATMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
+	unsigned int MTMATgetNbLignes() const;
+	unsigned int MTMATgetNbColonnes() const;
+	MType MTMATget(unsigned int uiLigne, unsigned int uiColonne);
+	MType MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur);
+	void MTMATsetMatrice(const MType ** MTMATMatrice, const unsigned int uiLignes, const unsigned int uiColonnes);
 
-	//Operateurs
-	CMatrice<MType> & operator*(MType MTValeur);
-	CMatrice<MType> & operator*(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator/(MType MTValeur);
-	CMatrice<MType> & operator+(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
+	//Surcharges d'operateurs
 	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
 };
 

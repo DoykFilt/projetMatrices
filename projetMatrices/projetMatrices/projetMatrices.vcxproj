@@ -97,7 +97,13 @@
     <ClCompile Include="CMatrice.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="projetMatricesMauvaiseVersion.cpp" />
+=======
+    <ClCompile Include="parseur.cpp" />
+    <ClCompile Include="OperatorSurcharges.cpp" />
+    <ClCompile Include="projetMatrices.cpp" />
+>>>>>>> RÃ©ajustement des surcharges d'opÃ©rateur Cmatrice + dÃ©but parseur
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
