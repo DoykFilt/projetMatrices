@@ -5,6 +5,14 @@
 
 using namespace std;
 
+/******************************************************************************
+Constructeur
+*******************************************************************************
+Entrée : Rien
+Necessité : Néant
+Sortie : Rien
+Entraine : L'objet a été initialisé
+******************************************************************************/
 Cparseur::Cparseur()
 {	
 	pctabBalisesValeurs[0][0] = _strdup(TYPEMATRICE);
@@ -19,6 +27,14 @@ Cparseur::Cparseur()
 	pcType = nullptr;
 }
 
+/******************************************************************************
+Constructeur de recopie
+*******************************************************************************
+Entrée : Référence sur un objet de type Cparseur
+Necessité : Néant
+Sortie : Rien
+Entraine : L'objet a été initialisé par recopie de l'objet en paramètre
+******************************************************************************/
 Cparseur::Cparseur(Cparseur & PARObjet)
 {	
 	pctabBalisesValeurs[0][0] = _strdup(PARObjet.pctabBalisesValeurs[0][0]);
@@ -33,6 +49,14 @@ Cparseur::Cparseur(Cparseur & PARObjet)
 	pcType = _strdup(PARObjet.pcType);
 }
 
+/******************************************************************************
+Destructeur
+*******************************************************************************
+Entrée : Rien
+Necessité : Néant
+Sortie : Rien
+Entraine : L'espace alloué pour les attributs de l'objet a été libéré
+******************************************************************************/
 Cparseur::~Cparseur()
 {
 	free(pctabBalisesValeurs[0][0]);
@@ -60,7 +84,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 	unsigned int uiCompteur = 0;
 	unsigned int uiCompteurpcLigne = 0, uiCompteurpcTemp = 0;
 	char * pcLigne = (char *) malloc(sizeof(char) * 256);
-	char * pcTemp;
+	char * pcTemp, * pcSavePosLigne;
 		
 	pcTemp = (char *) malloc(sizeof(char));
 	if(pcTemp == nullptr)
@@ -83,26 +107,38 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 		uiCompteurpcLigne = 0;
 		_strupr_s(pcLigne, strlen(pcLigne) + 1);
 
-		if(strstr(pcLigne, pctabBalisesValeurs[0][0]) != NULL)
+		pcSavePosLigne = pcLigne;
+
+		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[0][0]);
+		if(pcSavePosLigne != NULL)
 		{
-			pctabBalisesValeurs[0][1] = PARrecupererElement(pcLigne);
+			pctabBalisesValeurs[0][1] = PARrecupererElement(pcSavePosLigne);
+			PAReffacerElmt(pctabBalisesValeurs[0][0], pctabBalisesValeurs[0][1], pcSavePosLigne);
 		}
-		else if(strstr(pcLigne, pctabBalisesValeurs[1][0]) != NULL)
+		
+		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[1][0]);
+		if(pcSavePosLigne!= NULL)
 		{
-			pctabBalisesValeurs[1][1] = PARrecupererElement(pcLigne);
+			pctabBalisesValeurs[1][1] = PARrecupererElement(pcSavePosLigne);
+			PAReffacerElmt(pctabBalisesValeurs[1][0], pctabBalisesValeurs[1][1], pcSavePosLigne);
 		}
-		else if(strstr(pcLigne, pctabBalisesValeurs[2][0]) != NULL)
+		
+		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[2][0]);
+		if(pcSavePosLigne != NULL)
 		{
-			pctabBalisesValeurs[2][1] = PARrecupererElement(pcLigne);
+			pctabBalisesValeurs[2][1] = PARrecupererElement(pcSavePosLigne);
+			PAReffacerElmt(pctabBalisesValeurs[2][0], pctabBalisesValeurs[2][1], pcSavePosLigne);
 		}
-		else if(strstr(pcLigne, pctabBalisesValeurs[3][0]) != NULL)
+		
+		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[3][0]);
+		if(pcSavePosLigne != NULL)
 		{
 			//On avance jusqu'à '['
-			while(pcLigne[uiCompteurpcLigne] != '[')
+			while(pcSavePosLigne[uiCompteurpcLigne] != '[')
 			{
-				if(pcLigne[uiCompteurpcLigne] == '\0')
+				if(pcSavePosLigne[uiCompteurpcLigne] == '\0')
 				{
-					if(!fichier.getline(pcLigne, 256))
+					if(!fichier.getline(pcSavePosLigne, 256))
 					{
 						//Erreur fin du fichier atteint, '[' recherché !
 					}
@@ -113,9 +149,9 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 			}
 			uiCompteurpcLigne++;
 			//Ensuite on prend tout jusqu'au ']' ou jusqu'à la fin du fichier
-			while(pcLigne[uiCompteurpcLigne] != ']')
+			while(pcSavePosLigne[uiCompteurpcLigne] != ']')
 			{
-				if(pcLigne[uiCompteurpcLigne] == '\0')
+				if(pcSavePosLigne[uiCompteurpcLigne] == '\0')
 				{
 					pcTemp = (char *) realloc(pcTemp, sizeof(char) * (strlen(pcTemp) + 1));
 					if(pcTemp == nullptr)
@@ -125,7 +161,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 					pcTemp[uiCompteurpcTemp] = ' ';
 					uiCompteurpcTemp++;
 
-					if(!fichier.getline(pcLigne, 256))
+					if(!fichier.getline(pcSavePosLigne, 256))
 					{
 						//Erreur fin du fichier atteint, ']' recherché !
 					}
@@ -138,7 +174,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 					{
 						//erreur reallocation échouée
 					}
-					pcTemp[uiCompteurpcTemp] = pcLigne[uiCompteurpcLigne];
+					pcTemp[uiCompteurpcTemp] = pcSavePosLigne[uiCompteurpcLigne];
 					uiCompteurpcLigne++;
 					uiCompteurpcTemp++;
 				}
@@ -223,8 +259,6 @@ Entraine : Le bon type a été détecté ou aucun ne l'a été
 ******************************************************************************/
 void Cparseur::PARreconnaitreType(char * pcElm)
 {
-	free(pcType);
-
 	_strupr_s(pcElm, strlen(pcElm) + 1);
 	if(strcmp(pcElm, DOUBLE) == 0)
 		pcType= _strdup(DOUBLE);
@@ -248,6 +282,14 @@ void Cparseur::PARreconnaitreType(char * pcElm)
 	pctabBalisesValeurs[0][1] = _strdup(pcType);
 }
 
+/******************************************************************************
+PARgetType
+*******************************************************************************
+Entrée : Rien
+Necessité : Néant
+Sortie : Retourne la valeur non modifiable du type de la dernière matrice nulle
+Entraine : L'objet a été initialisé
+******************************************************************************/
 const char * Cparseur::PARgetType()
 {
 	return (const char *)pcType;
@@ -325,6 +367,34 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 	}
 
 	return pcRetour;
+}
+
+/******************************************************************************
+PAReffacerElmt
+*******************************************************************************
+Entrée : trois chaînes de caractères : les deux élément à supprimer de la troisième
+Necessité : Néant
+Sortie : Rien
+Entraine : Les deux chaînes et le égal ont été supprimés de la chaîne pcSrc
+******************************************************************************/
+void Cparseur::PAReffacerElmt(char * pcElmt, char * pcValeur, char * pcSrc)
+{
+	unsigned int uiCptrBalise, uiCptrValeur;
+
+	//On efface la balise
+	for(uiCptrBalise = 0; uiCptrBalise < strlen(pcElmt); uiCptrBalise++)
+		pcSrc[uiCptrBalise] = ' ';
+
+	//On efface les blancs et l'égal
+	while (pcSrc[uiCptrBalise] == ' ' || pcSrc[uiCptrBalise] == '=')
+	{
+		pcSrc[uiCptrBalise] = ' ';
+		uiCptrBalise++;
+	}
+
+	//On fface la valeur
+	for(uiCptrValeur = 0; uiCptrValeur < strlen(pcValeur); uiCptrValeur++)
+		pcSrc[uiCptrBalise + uiCptrValeur] = ' ';
 }
 
 /******************************************************************************

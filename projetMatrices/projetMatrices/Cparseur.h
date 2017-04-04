@@ -40,6 +40,7 @@ private :
 	void PARreconnaitreType(char * pcElm);
 	unsigned int PARreconnaitreTaille(char * pcElm);
 	char * PARrecupererElement(char * pcElm);
+	void PAReffacerElmt(char * pcElmt, char * pcValeur, char * pcSrc);
 };
 
 #endif
