@@ -1,6 +1,20 @@
 #ifndef CMATRICE_H
 #define CMATRICE_H
 
+/******************************************************************************
+class CMatrice<class MType>
+*******************************************************************************
+
+	Ce Canvas de classe permet de généré une matrice de type générique et de
+	faire des manipulations sur en entre matrices.
+
+	Attributs
+		uiMATnbLignes : Le nombre de lignes de la matrice
+		uiMATnbColonnes : Le nombre de colonne de la matrice
+		ppMTMATMatrice : La matrice
+
+******************************************************************************/
+
 template <class MType> class CMatrice
 {
 private :
@@ -37,6 +51,6 @@ public :
 	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
 };
 
-#include "CMAtrice.cpp";
+#include "Cmatrice.cpp";
 
 #endif

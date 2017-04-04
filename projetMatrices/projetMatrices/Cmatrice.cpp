@@ -13,12 +13,10 @@ template<class MType> CMatrice<MType>::CMatrice()
 {
 	uiMATnbLignes = 0;
 	uiMATnbColonnes = 0;
+
 	ppMTMATMatrice = (MType **)malloc(0);
 	if(ppMTMATMatrice == nullptr)
-	{
-/*		Cexception * EXCexception = new Cexception(2, "Allocation échouée");
-		throw *EXCexception;
-	*/}
+		throw Cexception(2, "Dans le constructeur de CMatrice");
 }
 
 /******************************************************************************
@@ -36,18 +34,16 @@ template<class MType> CMatrice<MType>::CMatrice(const CMatrice<MType> & MTMATMat
 
 	uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
 	uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
+
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
 	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Allocation échouée");
+		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-		{
-			//Cexception * EXCexception = new Cexception(2, "Allocation échouée");
-			//throw *EXCexception;
-		}
+			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
@@ -71,19 +67,13 @@ template<class MType> CMatrice<MType>::CMatrice(MType ** & ppMTMatrice, unsigned
 	uiMATnbColonnes = uiColonnes;
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
 	if(ppMTMATMatrice == nullptr)
-	{
-		//Cexception * EXCexception = new Cexception(2, "Allocation échouée");
-		//throw * EXCexception;
-	}
+		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-		{
-			//Cexception * EXCexception = new Cexception(2, "Allocation échouée");
-			//throw *EXCexception;
-		}
+			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMatrice[uiCompteurLignes][uiCompteurColonnes];
@@ -106,17 +96,14 @@ template<class MType> CMatrice<MType>::CMatrice(unsigned int uiLignes, unsigned 
 	uiMATnbLignes = uiLignes;
 	uiMATnbColonnes =uiColonnes;
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
-/*	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Allocation échouée");
-		*/
+	if(ppMTMATMatrice == nullptr)
+		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-		{
-/*			Cexception * EXCexception = new Cexception(2, "Allocation échouée");
-			throw *EXCexception;
-	*/	}
+			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = 0;
@@ -151,21 +138,23 @@ MTMATTransposeeMatrice
 template<class MType> CMatrice<MType> & CMatrice<MType>::MTMATTransposeeMatrice() const
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
+	CMatrice<MType> * MTMATMatrice;
 
 	MType ** ppMTMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbColonnes);
 	if(ppMTMatrice == nullptr)
-		throw Cexception(2, "Allocation échouée");
+		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbColonnes; uiCompteurLignes++)
 	{
 		ppMTMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbLignes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-			throw Cexception(2, "Allocation échouée");
+			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbLignes; uiCompteurColonnes++)
 			ppMTMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurColonnes][uiCompteurLignes];
 	}
 	
-	CMatrice<MType> * MTMATMatrice = new CMatrice<MType>(ppMTMatrice, uiCompteurLignes, uiCompteurColonnes);
+	MTMATMatrice = new CMatrice<MType>(ppMTMatrice, uiCompteurLignes, uiCompteurColonnes);
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbColonnes; uiCompteurLignes++)
 		free(ppMTMatrice[uiCompteurLignes]);
@@ -231,7 +220,8 @@ MTMATget
 template<class MType> MType CMatrice<MType>::MTMATget(unsigned int uiLigne, unsigned int uiColonne)
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
-		throw Cexception(4, "Tailles en paramètre trop grandes");
+		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATget)");
+
 	return ppMTMATMatrice[uiLigne][uiColonne];
 }
 
@@ -246,7 +236,8 @@ MTMATset
 template<class MType> MType CMatrice<MType>::MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur)
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
-		throw Cexception(4, "Tailles en paramètre trop grandes");
+		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATset)");
+
 	ppMTMATMatrice[uiLigne][uiColonne] = MTValeur;
 }
 
@@ -266,15 +257,16 @@ template<class MType> void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTM
 	{
 		ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * uiLignes);
 		if(ppMTMATMatrice == nullptr)
-			throw Cexception(3, "Réallocation échouée");
+			throw Cexception(2, "Dans la methode MTMATsetMatrice");
 	}
 	else if(uiLignes < uiMATnbLignes)
 	{
 		for(uiCompteurLignes = uiMATnbLignes; uiCompteurLignes > uiLignes; uiCompteurLignes--)
 			free(ppMTMATMatrice[uiCompteurLignes]);
+
 		ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * uiLignes);
 		if(ppMTMATMatrice == nullptr)
-			throw Cexception(3, "Réallocation échouée");
+			throw Cexception(2, "Dans la methode MTMATsetMatrice");
 	}
 	uiMATnbLignes = uiLignes;
 
@@ -284,7 +276,7 @@ template<class MType> void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTM
 		{
 			ppMTMATMatrice[uiCompteurLignes] = (MType *)realloc(ppMTMATMatrice[uiCompteurLignes], sizeof(MType) * uiColonnes);
 			if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-				throw Cexception(3, "Réallocation échouée");
+				throw Cexception(2, "Dans la methode MTMATsetMatrice");
 		}
 	}
 	uiMATnbColonnes = uiColonnes;
@@ -295,7 +287,7 @@ template<class MType> void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTM
 }
 
 /******************************************************************************
-surcharge de operator=
+surcharge de l'opérateur d'affectation
 *******************************************************************************
 	Entrée : un objet du même type
 	Necessité : Néant
@@ -306,32 +298,51 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 
-	if(MTMATMatrice.uiMATnbLignes > uiMATnbLignes)
+	//Dans le cas où notre objet n'a pas été préalablement alloué
+	if(ppMTMATMatrice == nullptr)
 	{
-		ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
-/*		if(ppMTMATMatrice == nullptr)
-			throw Cexception(3, "Réallocation échouée");
-	*/}
-	else if(MTMATMatrice.uiMATnbLignes < uiMATnbLignes)
-	{
-		for(uiCompteurLignes = uiMATnbLignes; uiCompteurLignes > MTMATMatrice.uiMATnbLignes; uiCompteurLignes--)
-			free(ppMTMATMatrice[uiCompteurLignes]);
-		ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
-	/*	if(ppMTMATMatrice == nullptr)
-			throw Cexception(3, "Réallocation échouée");
-	*/}
-	uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
-
-	if(MTMATMatrice.uiMATnbColonnes > uiMATnbColonnes || MTMATMatrice.uiMATnbColonnes < uiMATnbColonnes)
-	{
+		ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
+		if(ppMTMATMatrice == nullptr)
+			throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+		uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
+		
 		for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 		{
-			ppMTMATMatrice[uiCompteurLignes] = (MType *)realloc(ppMTMATMatrice[uiCompteurLignes], sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
-		/*	if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-				throw Cexception(3, "Réallocation échouée");
-		*/}
+			ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
+			if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
+				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+		}
+		uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
 	}
-	uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
+	else //Sinon on realloue de la bonne taille
+	{
+		if(MTMATMatrice.uiMATnbLignes > uiMATnbLignes)
+		{
+			ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
+			if(ppMTMATMatrice == nullptr)
+				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+		}
+		else if(MTMATMatrice.uiMATnbLignes < uiMATnbLignes)
+		{
+			for(uiCompteurLignes = uiMATnbLignes; uiCompteurLignes > MTMATMatrice.uiMATnbLignes; uiCompteurLignes--)
+				free(ppMTMATMatrice[uiCompteurLignes]);
+			ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
+			if(ppMTMATMatrice == nullptr)
+				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+		}
+		uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
+
+		if(MTMATMatrice.uiMATnbColonnes > uiMATnbColonnes || MTMATMatrice.uiMATnbColonnes < uiMATnbColonnes)
+		{
+			for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
+			{
+				ppMTMATMatrice[uiCompteurLignes] = (MType *)realloc(ppMTMATMatrice[uiCompteurLignes], sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
+				if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
+					throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+			}
+		}
+		uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
+	}
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
@@ -340,38 +351,55 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 	return *this;
 }
 
+/******************************************************************************
+surcharge de operator*
+*******************************************************************************
+	Entrée : une valeur de type MType
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
 template<class MType> CMatrice<MType> & CMatrice<MType>::operator*(MType MTValeur)
 {
 	unsigned int uiCompteurLignes, uiCompteursColonnes;
 
-	CMatrice<MType> * MTMATNewMatrice = new CMatrice<MType>(ppMTMATMatrice, uiMATnbLignes, uiMATnbColonnes);
+	CMatrice<MType> * MTMATNouvelleMatrice = new CMatrice<MType>(ppMTMATMatrice, uiMATnbLignes, uiMATnbColonnes);
 	
-	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATNewMatrice->uiMATnbLignes; uiCompteurLignes++)
-		for(uiCompteursColonnes = 0; uiCompteursColonnes < MTMATNewMatrice->uiMATnbColonnes; uiCompteursColonnes++)
-			MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] = MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] * MTValeur;
+	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATNouvelleMatrice->uiMATnbLignes; uiCompteurLignes++)
+		for(uiCompteursColonnes = 0; uiCompteursColonnes < MTMATNouvelleMatrice->uiMATnbColonnes; uiCompteursColonnes++)
+			MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] = MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] * MTValeur;
 
-	return *MTMATNewMatrice;
+	return *MTMATNouvelleMatrice;
 }
 
+/******************************************************************************
+surcharge de operator*
+*******************************************************************************
+	Entrée : un objet CMatrice du même type que l'objet en cours
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
 template<class MType> CMatrice<MType> & CMatrice<MType>::operator*(CMatrice<MType> const & MTMATMatrice)
 {
 	unsigned int uiCompteurLignesMAT1, uiCompteurColonnesMAT2;
 	unsigned int uiCompteurOperation;
 	MType MTvaleurCase;
+	MType ** ppMTMatrice;
 
 	if(uiMATnbColonnes != MTMATMatrice.uiMATnbLignes)
-		throw Cexception(3, "Calcul sur des matrices de taille imcompatible");
+			throw Cexception(3, "Tailles des matrices incompatible (dans la surcharge operator*(CMatrice<MType> const &)");
 
 
-	MType ** ppMTMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbColonnes);
+	ppMTMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbColonnes);
 	if(ppMTMatrice == nullptr)
-		throw Cexception(2, "Allocation échouée");
+		throw Cexception(1, "Dans la surcharge operator*(CMatrice<MType> const &)");
 
 	for(uiCompteurLignesMAT1 = 0; uiCompteurLignesMAT1 < uiMATnbLignes; uiCompteurLignesMAT1++)
 	{
 		ppMTMatrice[uiCompteurLignesMAT1] = (MType *)malloc(sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignesMAT1] == nullptr)
-			throw Cexception(2, "Allocation échouée");
+			throw Cexception(1, "Dans la surcharge operator*(CMatrice<MType> const &)");
 	}
 
 	for(uiCompteurLignesMAT1 = 0; uiCompteurLignesMAT1 < uiMATnbLignes; uiCompteurLignesMAT1++)
@@ -390,47 +418,92 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator*(CMatrice<MTyp
 	return *(new CMatrice<MType>(ppMTMatrice, uiMATnbLignes, MTMATMatrice.uiMATnbColonnes));
 }
 
+/******************************************************************************
+surcharge de operator/
+*******************************************************************************
+	Entrée : un objet CMatrice du même type que l'objet en cours
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
 template<class MType> CMatrice<MType> & CMatrice<MType>::operator/(MType MTValeur)
 {
 	unsigned int uiCompteurLignes, uiCompteursColonnes;
 
-	CMatrice<MType> * MTMATNewMatrice = new CMatrice<MType>(ppMTMATMatrice, uiMATnbLignes, uiMATnbColonnes);
+	CMatrice<MType> * MTMATNouvelleMatrice = new CMatrice<MType>(ppMTMATMatrice, uiMATnbLignes, uiMATnbColonnes);
 	
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 		for(uiCompteursColonnes = 0; uiCompteursColonnes < uiMATnbColonnes; uiCompteursColonnes++)
-			MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] = MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] / MTValeur;
+			MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] = MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteursColonnes] / MTValeur;
 
-	return *MTMATNewMatrice;
+	return *MTMATNouvelleMatrice;
 }
 
+/******************************************************************************
+surcharge de operator+
+*******************************************************************************
+	Entrée : un objet CMatrice du même type que l'objet en cours
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
 template<class MType> CMatrice<MType> & CMatrice<MType>::operator+(CMatrice<MType> const & MTMATMatrice)
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
+	CMatrice<MType> * MTMATNouvelleMatrice;
 
-/*	if(uiMATnbLignes != MTMATMatrice.uiMATnbLignes || uiMATnbColonnes != MTMATMatrice.uiMATnbColonnes)
-		throw Cexception(3, "Calcule sur matrices de tailles incompatibles");
-		*/
-	CMatrice<MType> * MTMATNewMatrice = new CMatrice<MType>(uiMATnbLignes, uiMATnbColonnes);
+	if(uiMATnbLignes != MTMATMatrice.uiMATnbLignes || uiMATnbColonnes != MTMATMatrice.uiMATnbColonnes)
+		throw Cexception(3, "Tailles des matrices incompatible (dans la surcharge operator+(CMatrice<MType> const &)");
+		
+	MTMATNouvelleMatrice = new CMatrice<MType>(uiMATnbLignes, uiMATnbColonnes);
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATMatrice.uiMATnbLignes; uiCompteurLignes++)
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < MTMATMatrice.uiMATnbColonnes; uiCompteurColonnes++)
-			MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] + MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
+			MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] + MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
 
-	return *MTMATNewMatrice;
+	return *MTMATNouvelleMatrice;
 }
 
+/******************************************************************************
+surcharge de operator-
+*******************************************************************************
+	Entrée : un objet CMatrice du même type que l'objet en cours
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
 template<class MType> CMatrice<MType> & CMatrice<MType>::operator-(CMatrice<MType> const & MTMATMatrice)
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 
-/*	if(uiMATnbLignes != MTMATMatrice.uiMATnbLignes || uiMATnbColonnes != MTMATMatrice.uiMATnbColonnes)
-		throw Cexception(3, "Calcule sur matrices de tailles incompatibles");
-		*/
-	CMatrice<MType> * MTMATNewMatrice = new CMatrice<MType>(uiMATnbLignes, uiMATnbColonnes);
+	if(uiMATnbLignes != MTMATMatrice.uiMATnbLignes || uiMATnbColonnes != MTMATMatrice.uiMATnbColonnes)
+		throw Cexception(3, "Tailles des matrices incompatible (dans la surcharge operator-(CMatrice<MType> const &)");
+	CMatrice<MType> * MTMATNouvelleMatrice = new CMatrice<MType>(uiMATnbLignes, uiMATnbColonnes);
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATMatrice.uiMATnbLignes; uiCompteurLignes++)
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < MTMATMatrice.uiMATnbColonnes; uiCompteurColonnes++)
-			MTMATNewMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] - MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
+			MTMATNouvelleMatrice->ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] - MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
 
-	return *MTMATNewMatrice;
+	return *MTMATNouvelleMatrice;
+}
+
+/******************************************************************************
+surcharge de operator* de double
+*******************************************************************************
+	Entrée : un double et un objet CMatrice de type générique
+	Necessité : Néant
+	Sortie : Une référence sur le nouvel objet
+	Entraine : Un nouvel objet a été alloué avec les bonnes valeurs
+******************************************************************************/
+template<class MType> CMatrice<MType> & operator*(double dValeur, CMatrice<MType> const & MTMATMatrice)
+{
+	unsigned int uiCompteurLignes, uiCompteursColonnes;
+
+	CMatrice<MType> * MTMATNouvelleMatrice = new CMatrice<MType>(MTMATMatrice);
+	
+	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATNouvelleMatrice->MTMATgetNbLignes(); uiCompteurLignes++)
+		for(uiCompteursColonnes = 0; uiCompteursColonnes < MTMATNouvelleMatrice->MTMATgetNbColonnes(); uiCompteursColonnes++)
+			MTMATNouvelleMatrice->MTMATset(uiCompteurLignes, uiCompteursColonnes, MTMATNouvelleMatrice->MTMATget(uiCompteurLignes, uiCompteursColonnes) * dValeur);
+
+	return *MTMATNouvelleMatrice;
 }

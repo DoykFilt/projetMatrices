@@ -16,13 +16,13 @@ Entraine : L'objet a été initialisé
 Cparseur::Cparseur()
 {	
 	pctabBalisesValeurs[0][0] = _strdup(TYPEMATRICE);
-	pctabBalisesValeurs[0][1] = _strdup("");
+	pctabBalisesValeurs[0][1] = nullptr;
 	pctabBalisesValeurs[1][0] = _strdup(NBLIGNES);
-	pctabBalisesValeurs[1][1] = _strdup("");
+	pctabBalisesValeurs[1][1] = nullptr;
 	pctabBalisesValeurs[2][0] = _strdup(NBCOLONNES);
-	pctabBalisesValeurs[2][1] = _strdup("");
+	pctabBalisesValeurs[2][1] = nullptr;
 	pctabBalisesValeurs[3][0] = _strdup(MATRICE);
-	pctabBalisesValeurs[3][1] = _strdup("");
+	pctabBalisesValeurs[3][1] = nullptr;
 
 	pcType = nullptr;
 }
@@ -82,123 +82,125 @@ Entraine : la matrice est lue puis retourné
 void Cparseur::PARLireMatrice(char * pcfilename)
 {
 	unsigned int uiCompteur = 0;
-	unsigned int uiCompteurpcLigne = 0, uiCompteurpcTemp = 0;
-	char * pcLigne = (char *) malloc(sizeof(char) * 256);
-	char * pcTemp, * pcSavePosLigne;
+	unsigned int uiCompteurpcLigne, uiCompteurpcTempMat = 0;
+	char pcLigne[256]; //Stocke une ligne du fichier sur laquelle on va faire nos opérations
+	char * pcTempMat; //Tampon utilisé dans la lecture du corps de la matrice
+	char * pcTemp; //Tampon utilisé dans la lecture de tout le fichier
 		
-	pcTemp = (char *) malloc(sizeof(char));
-	if(pcTemp == nullptr)
-	{
-		//erreur d'allocation
-	}
-	pcTemp[uiCompteurpcTemp] = '\0';
-
-
-	// *************** On collecte d'abord les lignes et éléments ************************
+	/*
+	if(pcLigne == nullptr);
+		throw Cexception(1, "Lors de l'initialisation de la methode (PARLireMatrice) 2");
+*/
+	pcTempMat = (char *) malloc(sizeof(char));
+	if(pcTempMat == nullptr)
+		throw Cexception(1, "Lors de l'initialisation de la methode (PARLireMatrice) 1");
+	pcTempMat[uiCompteurpcTempMat] = '\0';
+	
+		
+	//Ouverture du fichier
 	ifstream fichier(pcfilename, ios::in);
 	if(fichier.fail())
-	{
-		//erreur le fichier n'existe pas
-		cout << "Fichier non trouvé !"<<endl;
-	}
+		throw Cexception(5);
 
+	//Boucle tant que la fin du fichier n'est pas atteinte
 	while(fichier.getline(pcLigne, 256))
 	{
+		//On place le compteur de la ligne au début et on la met en majuscule
 		uiCompteurpcLigne = 0;
 		_strupr_s(pcLigne, strlen(pcLigne) + 1);
 
-		pcSavePosLigne = pcLigne;
+		pcTemp = pcLigne;//pour pouvoir manipuler la chaîne
 
-		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[0][0]);
-		if(pcSavePosLigne != NULL)
+		//On cherche la première balise sur la ligne : TYPEMATRICE
+		pcTemp = strstr(pcLigne, pctabBalisesValeurs[0][0]);
+		if(pcTemp != nullptr)
 		{
-			pctabBalisesValeurs[0][1] = PARrecupererElement(pcSavePosLigne);
-			PAReffacerElmt(pctabBalisesValeurs[0][0], pctabBalisesValeurs[0][1], pcSavePosLigne);
+			pctabBalisesValeurs[0][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pctabBalisesValeurs[0][0], pctabBalisesValeurs[0][1], pcTemp); // et on l'efface du tampon
 		}
 		
-		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[1][0]);
-		if(pcSavePosLigne!= NULL)
+		//On cherche la deuxième balise sur la même ligne : NBLIGNES
+		pcTemp = strstr(pcLigne, pctabBalisesValeurs[1][0]);
+		if(pcTemp!= nullptr)
 		{
-			pctabBalisesValeurs[1][1] = PARrecupererElement(pcSavePosLigne);
-			PAReffacerElmt(pctabBalisesValeurs[1][0], pctabBalisesValeurs[1][1], pcSavePosLigne);
+			pctabBalisesValeurs[1][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pctabBalisesValeurs[1][0], pctabBalisesValeurs[1][1], pcTemp); // et on l'efface du tampon
 		}
 		
-		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[2][0]);
-		if(pcSavePosLigne != NULL)
+		//On cherche la troisième balise sur la même ligne : NBCOLONNES
+		pcTemp = strstr(pcLigne, pctabBalisesValeurs[2][0]);
+		if(pcTemp != nullptr)
 		{
-			pctabBalisesValeurs[2][1] = PARrecupererElement(pcSavePosLigne);
-			PAReffacerElmt(pctabBalisesValeurs[2][0], pctabBalisesValeurs[2][1], pcSavePosLigne);
+			pctabBalisesValeurs[2][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
+			PAReffacerElmt(pctabBalisesValeurs[2][0], pctabBalisesValeurs[2][1], pcTemp); // et on l'efface du tampon
 		}
 		
-		pcSavePosLigne = strstr(pcLigne, pctabBalisesValeurs[3][0]);
-		if(pcSavePosLigne != NULL)
+		//Puis on cherche la matrice : MATRICE
+		pcTemp = strstr(pcLigne, pctabBalisesValeurs[3][0]);
+		if(pcTemp != nullptr)
 		{
-			//On avance jusqu'à '['
-			while(pcSavePosLigne[uiCompteurpcLigne] != '[')
+			//On avance jusqu'au '['
+			while(pcTemp[uiCompteurpcLigne] != '[')
 			{
-				if(pcSavePosLigne[uiCompteurpcLigne] == '\0')
+				if(pcTemp[uiCompteurpcLigne] == '\0')
 				{
-					if(!fichier.getline(pcSavePosLigne, 256))
-					{
-						//Erreur fin du fichier atteint, '[' recherché !
-					}
+					if(!fichier.getline(pcTemp, 256))
+						throw Cexception(6, "Fin du fichier atteint, '[' attendu");
+
 					uiCompteurpcLigne = 0;
 				}
 				else
 					uiCompteurpcLigne++;
 			}
 			uiCompteurpcLigne++;
-			//Ensuite on prend tout jusqu'au ']' ou jusqu'à la fin du fichier
-			while(pcSavePosLigne[uiCompteurpcLigne] != ']')
-			{
-				if(pcSavePosLigne[uiCompteurpcLigne] == '\0')
-				{
-					pcTemp = (char *) realloc(pcTemp, sizeof(char) * (strlen(pcTemp) + 1));
-					if(pcTemp == nullptr)
-					{
-						//erreur reallocation échouée
-					}
-					pcTemp[uiCompteurpcTemp] = ' ';
-					uiCompteurpcTemp++;
 
-					if(!fichier.getline(pcSavePosLigne, 256))
-					{
-						//Erreur fin du fichier atteint, ']' recherché !
-					}
+			//Ensuite on prend tout jusqu'au ']' ou jusqu'à la fin du fichier
+			while(pcTemp[uiCompteurpcLigne] != ']')
+			{
+				if(pcTemp[uiCompteurpcLigne] == '\0')
+				{
+					pcTempMat = (char *) realloc(pcTempMat, sizeof(char) * (strlen(pcTempMat) + 1));
+					if(pcTempMat == nullptr)
+						throw Cexception(2, "Dans la methode PARLireMatrice");
+
+					pcTempMat[uiCompteurpcTempMat] = ' ';
+					uiCompteurpcTempMat++;
+
+					if(!fichier.getline(pcTemp, 256))
+						throw Cexception(6, "Fin du fichier atteint, ']' attendu");
+
 					uiCompteurpcLigne = 0;
 				}
 				else
 				{
-					pcTemp = (char *) realloc(pcTemp, sizeof(char) * (strlen(pcTemp) + 1));
-					if(pcTemp == nullptr)
-					{
-						//erreur reallocation échouée
-					}
-					pcTemp[uiCompteurpcTemp] = pcSavePosLigne[uiCompteurpcLigne];
+					pcTempMat = (char *) realloc(pcTempMat, sizeof(char) * (strlen(pcTempMat) + 1));
+					if(pcTempMat == nullptr)
+						throw Cexception(2, "Dans la methode PARLireMatrice");
+
+					pcTempMat[uiCompteurpcTempMat] = pcTemp[uiCompteurpcLigne];
 					uiCompteurpcLigne++;
-					uiCompteurpcTemp++;
+					uiCompteurpcTempMat++;
 				}
 			}
-			pcTemp[uiCompteurpcTemp] = '\0';
-			pctabBalisesValeurs[3][1] = _strdup(pcTemp);
+			pcTempMat[uiCompteurpcTempMat] = '\0';
+			pctabBalisesValeurs[3][1] = _strdup(pcTempMat);
 		}
 	}
-	fichier.close();
-	free(pcLigne);
-	free(pcTemp);
 
 
-	//On test si tout a bien été récupéré
+	//Puis test si tout a bien été récupéré
 	for(uiCompteur = 0; uiCompteur < NBRBALISES; uiCompteur++)
 	{
-		if(strcmp(pctabBalisesValeurs[uiCompteur][1], ""))
-		{
-			//erreur toute les informations n'ont pas été renseignées
-		}
+		if(pctabBalisesValeurs[uiCompteur][1] == nullptr)
+			throw Cexception(6, "Fin du fichier , toute les informations n'ont pas été renseignées");
 	}
 		
 	//et on essaie de reconnaitre le type
 	PARreconnaitreType(pctabBalisesValeurs[0][1]);
+
+	//Pour finalement fermer le fichier et libérer les variables intermédiaires
+	fichier.close();
+	free(pcTempMat);
 }
 
 /******************************************************************************
@@ -211,14 +213,17 @@ Entraine : L'objet retourné a bien été initialisé avec des valeurs cohérente
 ******************************************************************************/
 CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 {
-	if(strcmp(pcType, DOUBLE) != 0)
-		return nullptr;
-
 	double ** ppdMatrice;
 	unsigned int uiNbrLignes, uiNbrColonnes;
 	unsigned int uiCptrLignes, uiCptrColonnes;
 	char * pcEnd;
+	CMatrice<double> * dMATMatrice;
 	
+	//Cette fonction ne peut retourner qu'une matrice de type double
+	if(strcmp(pcType, DOUBLE) != 0)
+		return nullptr;
+
+
 	uiNbrLignes = PARreconnaitreTaille(pctabBalisesValeurs[1][1]);
 	uiNbrColonnes = PARreconnaitreTaille(pctabBalisesValeurs[2][1]);
 
@@ -235,14 +240,12 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 		{
 			ppdMatrice[uiCptrLignes][uiCptrColonnes] = strtod(pcEnd, &pcEnd);
 			if(pcEnd == nullptr && (uiCptrColonnes < uiNbrColonnes || uiCptrLignes < uiNbrLignes))
-			{
-				//erreur le nombre de ligne ou de colonnes ne correspond pas à la matrice rentrée
-			}
+				throw Cexception(6, "La taille de la Matrice lue ne correspond pas a la taille reelle");
 		}
 		uiCptrColonnes = 0;
 	}
 
-	CMatrice<double> * dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrColonnes, uiNbrLignes);
+	dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrColonnes, uiNbrLignes);
 	
 	delete ppdMatrice;
 	
@@ -268,15 +271,12 @@ void Cparseur::PARreconnaitreType(char * pcElm)
 		pcType = _strdup(FLOAT);
 	else if(strcmp(pcElm, CHARACTER) == 0)
 		pcType = _strdup(CHARACTER);
-	else 
-	{
-		//erreur valeur en parametre inconnu
+	else
 		pcType = nullptr;
-	}
 	
 	if(pcType == nullptr || strcmp(pcType, DOUBLE) != 0)
 	{
-		//erreur cette version ne prend en compte que des mtrices de DOUBLE
+		throw Cexception(6, "Type inconnu (cette version ne prend en compte que le type Double)");
 	}
 
 	pctabBalisesValeurs[0][1] = _strdup(pcType);
@@ -308,9 +308,8 @@ unsigned int Cparseur::PARreconnaitreTaille(char * pcElm)
 	long int liTemp;
 	liTemp = strtol(pcElm, NULL, 0);
 	if(liTemp == 0L || liTemp == liTemp * (-1))
-	{
-		//erreur paramètre non valide
-	}
+		throw Cexception(6, "Impossible de reconnaitre la taille donnee pour la matrice");
+
 	return (unsigned int)liTemp;
 }
 
@@ -328,16 +327,10 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 	char * pcRetour = nullptr;
 	unsigned int uiCptr = 0;
 
-	if(pcRetour == nullptr)
-	{
-		//erreur d'allocation
-	}
-
 	pcTemp = strchr(pcElm, '=');
 	if(pcTemp == nullptr)
-	{
-		//erreur : pas de valeur trouvé pour la balise, elle doit se trouver sur la même ligne
-	}
+		throw Cexception(6, "Pas de valeur trouvé pour la matrice, elle doit se trouver sur la même ligne que la balise");
+
 	if(*(pcTemp) != '\0')
 	{
 		pcTemp++;
@@ -346,13 +339,14 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 		while(*(pcTemp) != ' ' && *(pcTemp) != '\0')
 		{
 			if(pcRetour == nullptr)
+			{
 				pcRetour = (char*)malloc(sizeof(char));
+				if(pcRetour == nullptr)
+					throw Cexception(1, "Dans la fonction PARrecupererElement");
+			}
 			else
 				pcRetour = (char *)realloc(pcRetour, sizeof(char) *(strlen(pcRetour) + 1));
-			if(pcRetour == nullptr)
-			{
-				//erreur d'allocation
-			}
+
 			pcRetour[uiCptr] = *pcTemp;
 			pcTemp++;
 			uiCptr++;
@@ -362,9 +356,7 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 	else pcRetour = nullptr;
 
 	if(pcRetour == nullptr || strlen(pcRetour) == 0)
-	{
-		//erreur : pas de valeur trouvé pour la balise, elle doit se trouver sur la même ligne
-	}
+		throw Cexception(6, "Pas de valeur trouvé pour la matrice, elle doit se trouver sur la même ligne que la balise");
 
 	return pcRetour;
 }
@@ -392,7 +384,7 @@ void Cparseur::PAReffacerElmt(char * pcElmt, char * pcValeur, char * pcSrc)
 		uiCptrBalise++;
 	}
 
-	//On fface la valeur
+	//On efface la valeur
 	for(uiCptrValeur = 0; uiCptrValeur < strlen(pcValeur); uiCptrValeur++)
 		pcSrc[uiCptrBalise + uiCptrValeur] = ' ';
 }

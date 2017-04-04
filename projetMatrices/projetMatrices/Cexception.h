@@ -7,14 +7,20 @@
 using namespace std;
 
 #define ERREUR_DEFAUT 0
-#define MESSAGE_DEFAUT "Message defaut "
+#define MESSAGE_DEFAUT "Erreur non définie"
 #define MESSAGE_SUPP_DEFAUT ""
 #define ERREUR_ALLOCATION 1
-#define MESSAGE_ALLOCATION "L'allocation a echoue "
+#define MESSAGE_ALLOCATION "Echec de l'allocation"
 #define ERREUR_REALLOCATION 2
-#define MESSAGE_REALLOCATION "La reallocation a echoue "
-#define ERREUR_TAILLE_MATRICE 3
-#define MESSAGE_TAILLE_MATRICE "Calcul sur des matrices de tailles incompatibles "
+#define MESSAGE_REALLOCATION "Echec de la reallocation"
+#define ERREUR_CALCUL 3
+#define MESSAGE_CALCUL "Calculs imcompatibles"
+#define ERREUR_PARAM 4
+#define MESSAGE_PARAM "Parametres inappriopries"
+#define ERREUR_FICHIER 5
+#define MESSAGE_FICHIER "Echec de l'ouverture du fichier"
+#define ERREUR_PARSEUR 6
+#define MESSAGE_PARSEUR "Echec lors du parsage"
 
 class Cexception
 {
@@ -29,8 +35,8 @@ public :
 
 	//Constructeurs et destructeurs
 	Cexception(); 
-	Cexception(unsigned int uiValeur, char * pcMessageDetail=MESSAGE_SUPP_DEFAUT); 
 	Cexception(const Cexception & EXCObjet);
+	Cexception(unsigned int uiValeur, char * pcMessageDetail=MESSAGE_SUPP_DEFAUT); 
 	~Cexception();
 
 	//Methodes
@@ -38,6 +44,9 @@ public :
 	void EXCModifier_Valeur(unsigned int uiValeur, bool reinitSuppMessage=false);
 	char * EXCLire_Message() const;
 	void EXCModifier_Message(char *pcMessage);
+
+	//Surcharges d'opérateurs
+	Cexception & operator=(Cexception const & EXCexception);
 };
 
 #endif

@@ -28,13 +28,26 @@ Cexception::Cexception(unsigned int uiValeur, char * pcMessageDetail)
 	uiEXCValeur = uiValeur;
 	switch(uiEXCValeur)
 	{
-	case 1 :pcEXCMessage = _strdup(MESSAGE_ALLOCATION);
+		case ERREUR_ALLOCATION :
+			pcEXCMessage = _strdup(MESSAGE_ALLOCATION);
 			break;
-	case 2 : pcEXCMessage = _strdup(MESSAGE_REALLOCATION);
+		case ERREUR_REALLOCATION : 
+			pcEXCMessage = _strdup(MESSAGE_REALLOCATION);
 			break;
-	case 3 : pcEXCMessage = _strdup(MESSAGE_TAILLE_MATRICE);
+		case ERREUR_CALCUL :
+			pcEXCMessage = _strdup(MESSAGE_CALCUL);
 			break;
-		default : pcEXCMessage = _strdup(MESSAGE_DEFAUT);
+		case ERREUR_PARAM :
+			pcEXCMessage = _strdup(MESSAGE_PARAM);
+			break;
+		case ERREUR_FICHIER :
+			pcEXCMessage = _strdup(MESSAGE_FICHIER);
+			break;
+		case ERREUR_PARSEUR :
+			pcEXCMessage = _strdup(MESSAGE_PARSEUR);
+			break;
+		default : 
+			pcEXCMessage = _strdup(MESSAGE_DEFAUT);
 	}
 	pcEXCMessageDetail = _strdup(pcMessageDetail);
 }
@@ -50,8 +63,8 @@ Entraine : Création d'un objet par recopie.
 Cexception::Cexception(const Cexception & EXCObjet)
 {
 	uiEXCValeur = EXCObjet.uiEXCValeur;
-	pcEXCMessage =_strdup(EXCObjet.pcEXCMessage);
-	pcEXCMessageDetail =_strdup(EXCObjet.pcEXCMessageDetail);
+	pcEXCMessage = _strdup(EXCObjet.pcEXCMessage);
+	pcEXCMessageDetail = _strdup(EXCObjet.pcEXCMessageDetail);
 }
 
 /******************************************************************************
@@ -60,11 +73,10 @@ Destructeur par défaut
 Entrée : Rien
 Necessité : Néant
 Sortie : Rien
-Entraine : Néant
+Entraine : L'espace alloué par l'objet a été libéré
 ******************************************************************************/
 Cexception::~Cexception()
 {
-	//probleme lors de la destruction des objets de la classe.
 	free(pcEXCMessage);
 	free(pcEXCMessageDetail);
 }
@@ -95,19 +107,29 @@ void Cexception::EXCModifier_Valeur(unsigned int uiValeur, bool reinitSuppMessag
 	uiEXCValeur = uiValeur;
 	switch(uiEXCValeur)
 	{
-		case 1 : free(pcEXCMessage);
+		case ERREUR_ALLOCATION :
 			pcEXCMessage = _strdup(MESSAGE_ALLOCATION);
 			break;
-		case 2 : free(pcEXCMessage);
+		case ERREUR_REALLOCATION : 
 			pcEXCMessage = _strdup(MESSAGE_REALLOCATION);
 			break;
-		case 3 : free(pcEXCMessage);
-			pcEXCMessage = _strdup(MESSAGE_TAILLE_MATRICE);
+		case ERREUR_CALCUL :
+			pcEXCMessage = _strdup(MESSAGE_CALCUL);
 			break;
-		default : free(pcEXCMessage);
+		case ERREUR_PARAM :
+			pcEXCMessage = _strdup(MESSAGE_PARAM);
+			break;
+		case ERREUR_FICHIER :
+			pcEXCMessage = _strdup(MESSAGE_FICHIER);
+			break;
+		case ERREUR_PARSEUR :
+			pcEXCMessage = _strdup(MESSAGE_PARSEUR);
+			break;
+		default : 
 			pcEXCMessage = _strdup(MESSAGE_DEFAUT);
 	}
-	if(reinitSuppMessage ==true)
+
+	if(reinitSuppMessage == true)
 	{
 		free(pcEXCMessageDetail);
 		pcEXCMessageDetail= _strdup(MESSAGE_SUPP_DEFAUT);
@@ -115,25 +137,26 @@ void Cexception::EXCModifier_Valeur(unsigned int uiValeur, bool reinitSuppMessag
 }
 
 /******************************************************************************
-Méthode de lecture de la valeur
+Méthode de lecture du messahge
 *******************************************************************************
 Entrée : Rien
 Necessité : Néant
-Sortie : Valeur
-Entraine : Retourne la valeur.
+Sortie : char * le message
+Entraine : Retourne le message entier
 ******************************************************************************/
 char * Cexception::EXCLire_Message() const
 {
-	size_t TailleMessage =(strlen(pcEXCMessage)+strlen(pcEXCMessageDetail) +1);
-	char* pcMessageComplet = _strdup( pcEXCMessage); // concaténation du message supp
-	strcat_s( pcMessageComplet, TailleMessage, pcEXCMessageDetail);
+	size_t TailleMessage = strlen(pcEXCMessage) + strlen(pcEXCMessageDetail) + 2;
+	char* pcMessageComplet = _strdup( pcEXCMessage);
+	strcat_s(pcMessageComplet, strlen(pcMessageComplet) + 2, " ");
+	strcat_s(pcMessageComplet, TailleMessage, pcEXCMessageDetail); // Concaténation des deux messages
 	return pcMessageComplet;
 } 
 
 /******************************************************************************
 Méhode de modification du message
 *******************************************************************************
-Entrée : Message
+Entrée : Char * Message
 Necessité : Néant
 Sortie : Rien
 Entraine : Modification du message.
@@ -142,4 +165,23 @@ void Cexception::EXCModifier_Message(char * pcMessage)
 {
 	free(pcEXCMessageDetail);
 	pcEXCMessageDetail = _strdup(pcMessage);
+}
+
+/******************************************************************************
+Surcharge de l'opérateur d'affectation
+*******************************************************************************
+Entrée : référence sur un objet de type Cexception
+Necessité : Néant
+Sortie : Rien
+Entraine : L'objet a été affecté par recopie de l'objet en paramètre
+******************************************************************************/
+Cexception & Cexception::operator=(Cexception const & EXCexception)
+{
+	uiEXCValeur = EXCexception.uiEXCValeur;
+	free(pcEXCMessage);
+	pcEXCMessage = _strdup(EXCexception.pcEXCMessage);
+	free(pcEXCMessageDetail);
+	pcEXCMessageDetail = _strdup(EXCexception.pcEXCMessageDetail);
+
+	return *this;
 }
