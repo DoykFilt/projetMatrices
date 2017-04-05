@@ -306,6 +306,7 @@ Entraine : L'entier retourné est une taille valide
 unsigned int Cparseur::PARreconnaitreTaille(char * pcElm)
 {
 	long int liTemp;
+	//on utilise strtol au cas où l'utilisateur aurait rentré un long ou un double au lieu d'un int
 	liTemp = strtol(pcElm, NULL, 0);
 	if(liTemp == 0L || liTemp == liTemp * (-1))
 		throw Cexception(6, "Impossible de reconnaitre la taille donnee pour la matrice");

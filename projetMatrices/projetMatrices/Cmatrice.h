@@ -44,13 +44,10 @@ public :
 
 	//Surcharges d'operateurs
 	CMatrice<MType> & operator=(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator*(MType MTValeur);
-	CMatrice<MType> & operator*(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator/(MType MTValeur);
-	CMatrice<MType> & operator+(CMatrice<MType> const & MTMATMatrice);
-	CMatrice<MType> & operator-(CMatrice<MType> const & MTMATMatrice);
 };
 
-#include "Cmatrice.cpp";
+//Fichiers .cpp à garder hors de la génération du projet pour son bon fonctionnement
+#include "Cmatrice.cpp"; //Le corps de la classe générique CMatrice<MType>
+#include "SurchargesOperateurs.cpp"; //Toutes les surcharges liées à la classe générique CMatrice<MType>
 
 #endif

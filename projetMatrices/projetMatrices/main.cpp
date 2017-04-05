@@ -9,7 +9,6 @@ void main(int argc, char * argv[])
 {
 	try
 	{
-		//On lit les matrices
 		unsigned int uiCmptr, uiNbrMatrice = 0;
 		double dValeur;
 		CMatrice<double> ** ppdMATListeMatrice = nullptr;
@@ -41,20 +40,12 @@ void main(int argc, char * argv[])
 		cout << "Entrez une valeur : " << endl;
 		cin >> dValeur;
 		cout << endl;
-
-		//On multiplie chaque matrice par cette valeur
-		cout << "Multiplication de toute les matrices par " << dValeur << " :\n\n";
-		for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
-		{
-			(*(ppdMATListeMatrice[uiCmptr]) * 4).MTMATAfficherMatrice();
-			cout << endl;
-		}
 	
 		//On multiplie chaque matrice par cette valeur
 		cout << "Multiplication de toute les matrices par " << dValeur << " :\n\n";
 		for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
 		{
-			(4.0 * *(ppdMATListeMatrice[uiCmptr])).MTMATAfficherMatrice();
+			(dValeur * *(ppdMATListeMatrice[uiCmptr])).MTMATAfficherMatrice();
 			cout << endl;
 		}
 	
@@ -62,7 +53,7 @@ void main(int argc, char * argv[])
 		cout << "Division de toute les matrices par " << dValeur << " :\n\n";
 		for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
 		{
-			(*(ppdMATListeMatrice[uiCmptr]) / 4).MTMATAfficherMatrice();
+			(*(ppdMATListeMatrice[uiCmptr]) / dValeur).MTMATAfficherMatrice();
 			cout << endl;
 		}
 	
@@ -71,7 +62,7 @@ void main(int argc, char * argv[])
 			dMATTemp = new CMatrice<double>(*ppdMATListeMatrice[0]);
 		for(uiCmptr = 1; uiCmptr < uiNbrMatrice; uiCmptr++)
 			*dMATTemp = *dMATTemp + *ppdMATListeMatrice[uiCmptr];
-		cout << "Résultat de l'addition de toute les matrice entre elles : \n" << endl;
+		cout << "Resultat de l'addition de toute les matrice entre elles : \n" << endl;
 		dMATTemp->MTMATAfficherMatrice();
 
 		//On alterne addition et soustraction entre toute les matrices
@@ -84,7 +75,7 @@ void main(int argc, char * argv[])
 			else
 				*dMATTemp = *dMATTemp - *ppdMATListeMatrice[uiCmptr];
 		}
-		cout << "Résultat de la soustraction alternée avec la soustraction des matrice entre elles : \n" << endl;
+		cout << "Resultat de la soustraction alternée avec la soustraction des matrice entre elles : \n" << endl;
 		dMATTemp->MTMATAfficherMatrice();
 
 		//On multiplie toute les matrices entre elles
@@ -92,7 +83,7 @@ void main(int argc, char * argv[])
 			*dMATTemp = *ppdMATListeMatrice[0];
 		for(uiCmptr = 1; uiCmptr < uiNbrMatrice; uiCmptr++)
 			*dMATTemp = *dMATTemp * *ppdMATListeMatrice[uiCmptr];
-		cout << "Résultat de la multiplication de toute les matrice entre elles : \n" << endl;
+		cout << "Resultat de la multiplication de toute les matrice entre elles : \n" << endl;
 		dMATTemp->MTMATAfficherMatrice();
 
 		//On libère la mémoire allouée
