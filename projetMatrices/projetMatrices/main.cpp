@@ -5,10 +5,14 @@
 
 using namespace std;
 
-void main(int argc, char * argv[])
+void main(int argc, char * arg[])
 {
 	try
 	{
+		
+		char * argv[2];
+		argc = 2;
+		argv[1] = "matrice.txt";
 		unsigned int uiCmptr, uiNbrMatrice = 0;
 		double dValeur;
 		CMatrice<double> ** ppdMATListeMatrice = nullptr;
@@ -31,14 +35,18 @@ void main(int argc, char * argv[])
 				if(ppdMATListeMatrice == nullptr)
 					throw Cexception(2, "Dans la fonction main");
 			}
-			(pPARparseur->PARcreerDoubleMatrice())->MTMATAfficherMatrice();
 			ppdMATListeMatrice[uiNbrMatrice] = pPARparseur->PARcreerDoubleMatrice();
 			uiNbrMatrice++;
 		}
 	
 		//On demande à l'utilisateur de rentrer un nombre
 		cout << "Entrez une valeur : " << endl;
-		cin >> dValeur;
+		while(!(cin >> dValeur))
+		{
+			cerr << "Erreur de saisie, ressaisissez une valeur valide (nombre reel)" << endl;
+            cin.clear();  
+            cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+		}
 		cout << endl;
 	
 		//On multiplie chaque matrice par cette valeur

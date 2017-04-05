@@ -145,7 +145,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 				if(pcTemp[uiCompteurpcLigne] == '\0')
 				{
 					if(!fichier.getline(pcTemp, 256))
-						throw Cexception(6, "Fin du fichier atteint, ']' attendu");
+						throw Cexception(6, "Fin du fichier atteint, '[' attendu");
 
 					uiCompteurpcLigne = 0;
 				}
@@ -192,7 +192,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 	for(uiCompteur = 0; uiCompteur < NBRBALISES; uiCompteur++)
 	{
 		if(pcPARtabBalisesValeurs[uiCompteur][1] == nullptr)
-			throw Cexception(6, "Fin du fichier , toutes les informations n'ont pas ete renseignees");
+			throw Cexception(6, "Fin du fichier, toutes les informations n'ont pas ete renseignees");
 	}
 		
 	//et on essaie de reconnaitre le type
@@ -338,7 +338,7 @@ unsigned int Cparseur::PARreconnaitreTaille(char * pcElm)
 		throw Cexception(6, "Impossible de reconnaitre la taille donnee pour la matrice");
 
 	if(liTemp < 0)
-		throw Cexception(6, "La taille de la matrice doit être positive");
+		throw Cexception(6, "La taille de la matrice doit etre positive");
 
 	return (unsigned int)liTemp;
 }
@@ -359,13 +359,16 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 
 	pcTemp = strchr(pcElm, '=');
 	if(pcTemp == nullptr)
-		throw Cexception(6, "Pas de valeur trouve pour la matrice, elle doit se trouver sur la meme ligne que la balise");
+		throw Cexception(6, "Pas de valeur detecte");
 
 	if(*(pcTemp) != '\0')
 	{
 		pcTemp++;
 		while(*(pcTemp) == ' ' && *(pcTemp) != '\0')
 			pcTemp++;
+		if(*pcTemp == '\0')
+			throw Cexception(6, "Pas de valeur detecte");
+
 		while(*(pcTemp) != ' ' && *(pcTemp) != '\0')
 		{
 			if(pcRetour == nullptr)

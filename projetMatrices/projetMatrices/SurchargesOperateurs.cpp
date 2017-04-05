@@ -99,6 +99,9 @@ template<class MType1, class MType2> CMatrice<MType1> & operator/(CMatrice<MType
 {
 	unsigned int uiCompteurLignes, uiCompteursColonnes;
 
+	if(MTValeur == (MType2)0)
+		throw Cexception(3, "Division par zero impossible !");
+
 	CMatrice<MType1> * MTMATNouvelleMatrice = new CMatrice<MType1>(MTMATMatrice);
 	
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATNouvelleMatrice->MTMATgetNbLignes(); uiCompteurLignes++)
