@@ -52,6 +52,9 @@ public :
 	CMatrice<char> * PARcreerCharMatrice(); //Pour une amélioration possible
 	CMatrice<float> * PARcreerFloatMatrice(); //Pour une amélioration possible
 
+	//Surcharges d'opérateurs
+	Cparseur & operator=(Cparseur const & PARparseur);
+
 private :
 	//Méthodes utilisé en interne pour la reconnaissance de la matrice
 	void PARreconnaitreType(char * pcElm);

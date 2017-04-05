@@ -145,7 +145,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 				if(pcTemp[uiCompteurpcLigne] == '\0')
 				{
 					if(!fichier.getline(pcTemp, 256))
-						throw Cexception(6, "Fin du fichier atteint, '[' attendu");
+						throw Cexception(6, "Fin du fichier atteint, ']' attendu");
 
 					uiCompteurpcLigne = 0;
 				}
@@ -192,7 +192,7 @@ void Cparseur::PARLireMatrice(char * pcfilename)
 	for(uiCompteur = 0; uiCompteur < NBRBALISES; uiCompteur++)
 	{
 		if(pcPARtabBalisesValeurs[uiCompteur][1] == nullptr)
-			throw Cexception(6, "Fin du fichier , toute les informations n'ont pas été renseignées");
+			throw Cexception(6, "Fin du fichier , toutes les informations n'ont pas ete renseignees");
 	}
 		
 	//et on essaie de reconnaitre le type
@@ -216,9 +216,14 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 	double ** ppdMatrice;
 	unsigned int uiNbrLignes, uiNbrColonnes;
 	unsigned int uiCptrLignes, uiCptrColonnes;
-	char * pcEnd;
+
 	CMatrice<double> * dMATMatrice;
 	
+	//sept variables utilisées pour la reconnaissance des chiffres
+	char * pcfix, *pcdef;
+	char * pctemp;
+	unsigned int uicfix = 0, uicdef = 0, uitemplen = 0;
+
 	//Cette fonction ne peut retourner qu'une matrice de type double
 	if(strcmp(pcPARType, DOUBLE) != 0)
 		return nullptr;
@@ -230,22 +235,39 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 	ppdMatrice = new double*[uiNbrLignes];
 	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
 		ppdMatrice[uiCptrLignes] = new double[uiNbrColonnes];
-
-	ppdMatrice[0][0] = strtod(pcPARtabBalisesValeurs[3][1], &pcEnd);
-	uiCptrColonnes = 1;
+	
+	pcfix = pcPARtabBalisesValeurs[3][1];
+	pcdef = pcPARtabBalisesValeurs[3][1];
+	pctemp = (char *)malloc(uitemplen + 1);
+	pctemp[0] = '\0';
 
 	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
 	{
-		for(; uiCptrColonnes < uiNbrColonnes; uiCptrColonnes++)
+		for(uiCptrColonnes = 0; uiCptrColonnes < uiNbrColonnes; uiCptrColonnes++)
 		{
-			ppdMatrice[uiCptrLignes][uiCptrColonnes] = strtod(pcEnd, &pcEnd);
-			if(pcEnd == nullptr && (uiCptrColonnes < uiNbrColonnes || uiCptrLignes < uiNbrLignes))
+			while(pcfix[uicfix] == ' ' && pcfix[uicfix] != '\0') uicfix++;
+			uicdef = uicfix;
+			while(pcdef[uicdef] != ' ' && pcdef[uicdef] != '\0') uicdef++;
+
+			if(pcfix[uicfix] == '\0')
 				throw Cexception(6, "La taille de la Matrice lue ne correspond pas a la taille reelle");
+
+			for(int i = 0; uicfix + i < uicdef; i++)
+			{
+				uitemplen ++;
+				pctemp = (char *)realloc(pctemp, uitemplen + 1);
+				pctemp[i] = pcfix[uicfix + i];
+				pctemp[i + 1] = '\0';
+			}
+			ppdMatrice[uiCptrLignes][uiCptrColonnes] = atof(pctemp);
+			uicfix = uicdef;
+			uitemplen = 0;
+			pctemp = (char *)realloc(pctemp, uitemplen + 1);
+			pctemp[0] = '\0';
 		}
-		uiCptrColonnes = 0;
 	}
 
-	dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrColonnes, uiNbrLignes);
+	dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrLignes, uiNbrColonnes);
 	
 	delete ppdMatrice;
 	
@@ -330,7 +352,7 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 
 	pcTemp = strchr(pcElm, '=');
 	if(pcTemp == nullptr)
-		throw Cexception(6, "Pas de valeur trouvé pour la matrice, elle doit se trouver sur la même ligne que la balise");
+		throw Cexception(6, "Pas de valeur trouve pour la matrice, elle doit se trouver sur la meme ligne que la balise");
 
 	if(*(pcTemp) != '\0')
 	{
@@ -357,7 +379,7 @@ char * Cparseur::PARrecupererElement(char * pcElm)
 	else pcRetour = nullptr;
 
 	if(pcRetour == nullptr || strlen(pcRetour) == 0)
-		throw Cexception(6, "Pas de valeur trouvé pour la matrice, elle doit se trouver sur la même ligne que la balise");
+		throw Cexception(6, "Pas de valeur trouve pour la matrice, elle doit se trouver sur la meme ligne que la balise");
 
 	return pcRetour;
 }
@@ -388,6 +410,33 @@ void Cparseur::PAReffacerElmt(char * pcElmt, char * pcValeur, char * pcSrc)
 	//On efface la valeur
 	for(uiCptrValeur = 0; uiCptrValeur < strlen(pcValeur); uiCptrValeur++)
 		pcSrc[uiCptrBalise + uiCptrValeur] = ' ';
+}
+
+
+/******************************************************************************
+surcharge de l'opérateur d'affectation
+*******************************************************************************
+	Entrée : un objet du même type
+	Necessité : Néant
+	Sortie : Une référence sur l'objet en cours qui a été modifié
+	Entraine : L'objet en cours est une copie de l'objet en paramètre
+******************************************************************************/
+Cparseur & Cparseur::operator=(Cparseur const & PARparseur)
+{
+	free(pcPARtabBalisesValeurs[0][1]);
+	free(pcPARtabBalisesValeurs[1][1]);
+	free(pcPARtabBalisesValeurs[2][1]);
+	free(pcPARtabBalisesValeurs[3][1]);
+	free(pcPARType);
+
+	pcPARtabBalisesValeurs[0][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[0][1]);
+	pcPARtabBalisesValeurs[1][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[1][1]);
+	pcPARtabBalisesValeurs[2][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[2][1]);
+	pcPARtabBalisesValeurs[3][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[3][1]);
+
+	pcPARType = _strdup(PARparseur.pcPARType);
+
+	return *this;
 }
 
 /******************************************************************************
