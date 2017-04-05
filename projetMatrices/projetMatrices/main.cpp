@@ -95,6 +95,8 @@ void main(int argc, char * argv[])
 	catch(Cexception EXCexception)
 	{
 		//Dans le cas d'une levé d'exception on l'attrape et on la lit
-		cout << "Erreur " << EXCexception.EXCLire_Valeur() << " : " << EXCexception.EXCLire_Message() << endl;
+		cout << "Erreur " ;
+		cout << EXCexception.EXCLire_Valeur() << " : " ;
+		cout << EXCexception.EXCLire_Message() << endl;
 	}
 }

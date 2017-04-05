@@ -250,7 +250,10 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 			while(pcdef[uicdef] != ' ' && pcdef[uicdef] != '\0') uicdef++;
 
 			if(pcfix[uicfix] == '\0')
+			{
+				free(pctemp);
 				throw Cexception(6, "La taille de la Matrice lue ne correspond pas a la taille reelle");
+			}
 
 			for(int i = 0; uicfix + i < uicdef; i++)
 			{
@@ -270,6 +273,7 @@ CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
 	dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrLignes, uiNbrColonnes);
 	
 	delete ppdMatrice;
+	free(pctemp);
 	
 	return dMATMatrice;
 }
@@ -332,6 +336,9 @@ unsigned int Cparseur::PARreconnaitreTaille(char * pcElm)
 	liTemp = strtol(pcElm, NULL, 0);
 	if(liTemp == 0L || liTemp == liTemp * (-1))
 		throw Cexception(6, "Impossible de reconnaitre la taille donnee pour la matrice");
+
+	if(liTemp < 0)
+		throw Cexception(6, "La taille de la matrice doit être positive");
 
 	return (unsigned int)liTemp;
 }
