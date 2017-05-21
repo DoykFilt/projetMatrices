@@ -2,29 +2,33 @@
 #include <iostream>
 #include "Cparseur.h"
 #include <string.h>
+#include "Cexception.h"
 
 using namespace std;
 
 /******************************************************************************
 Constructeur
 *******************************************************************************
-Entrée : Rien
-Necessité : Néant
+Entrée : char ** tableau contenant les noms de balise, unsigned int le nombre de balise
+Necessité : uiNbrBalises correspond au nombre de balises dans pcBalises
 Sortie : Rien
 Entraine : L'objet a été initialisé
 ******************************************************************************/
-Cparseur::Cparseur()
+Cparseur::Cparseur(char ** pcBalises, unsigned int uiNbrBalises)
 {	
-	pcPARtabBalisesValeurs[0][0] = _strdup(TYPEMATRICE);
-	pcPARtabBalisesValeurs[0][1] = nullptr;
-	pcPARtabBalisesValeurs[1][0] = _strdup(NBLIGNES);
-	pcPARtabBalisesValeurs[1][1] = nullptr;
-	pcPARtabBalisesValeurs[2][0] = _strdup(NBCOLONNES);
-	pcPARtabBalisesValeurs[2][1] = nullptr;
-	pcPARtabBalisesValeurs[3][0] = _strdup(MATRICE);
-	pcPARtabBalisesValeurs[3][1] = nullptr;
+	unsigned int uiCompteur;
 
-	pcPARType = nullptr;
+	ppcPARBalises = new char*[uiNbrBalises];
+	pppcPARtabBalisesValeurs = new char**[uiNbrBalises];
+	uiPARNbrBalises = uiNbrBalises;
+
+	for(uiCompteur = 0; uiCompteur < uiNbrBalises; uiCompteur++)
+	{
+		ppcPARBalises[uiCompteur] = _strdup(pcBalises[uiCompteur]);
+		pppcPARtabBalisesValeurs[uiCompteur] = new char*[2];
+		pppcPARtabBalisesValeurs[uiCompteur][0] = _strdup(pcBalises[uiCompteur]);
+		pppcPARtabBalisesValeurs[uiCompteur][1] = nullptr;
+	}
 }
 
 /******************************************************************************
@@ -37,16 +41,19 @@ Entraine : L'objet a été initialisé par recopie de l'objet en paramètre
 ******************************************************************************/
 Cparseur::Cparseur(Cparseur & PARObjet)
 {	
-	pcPARtabBalisesValeurs[0][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[0][0]);
-	pcPARtabBalisesValeurs[0][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[0][1]);
-	pcPARtabBalisesValeurs[1][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[1][0]);
-	pcPARtabBalisesValeurs[1][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[1][1]);
-	pcPARtabBalisesValeurs[2][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[2][0]);
-	pcPARtabBalisesValeurs[2][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[2][1]);
-	pcPARtabBalisesValeurs[3][0] = _strdup(PARObjet.pcPARtabBalisesValeurs[3][0]);
-	pcPARtabBalisesValeurs[3][1] = _strdup(PARObjet.pcPARtabBalisesValeurs[3][1]);
+	unsigned int uiCompteur;
+	
+	ppcPARBalises = new char*[PARObjet.uiPARNbrBalises];
+	pppcPARtabBalisesValeurs = new char**[PARObjet.uiPARNbrBalises];
+	uiPARNbrBalises = PARObjet.uiPARNbrBalises;
 
-	pcPARType = _strdup(PARObjet.pcPARType);
+	for(uiCompteur = 0; uiCompteur < PARObjet.uiPARNbrBalises; uiCompteur++)
+	{
+		ppcPARBalises[uiCompteur] = _strdup(PARObjet.ppcPARBalises[uiCompteur]);
+		pppcPARtabBalisesValeurs[uiCompteur] = new char*[2];
+		pppcPARtabBalisesValeurs[uiCompteur][0] = _strdup(PARObjet.pppcPARtabBalisesValeurs[uiCompteur][0]);
+		pppcPARtabBalisesValeurs[uiCompteur][1] = _strdup(PARObjet.pppcPARtabBalisesValeurs[uiCompteur][1]);
+	}
 }
 
 /******************************************************************************
@@ -59,369 +66,18 @@ Entraine : L'espace alloué pour les attributs de l'objet a été libéré
 ******************************************************************************/
 Cparseur::~Cparseur()
 {
-	free(pcPARtabBalisesValeurs[0][0]);
-	free(pcPARtabBalisesValeurs[0][1]);
-	free(pcPARtabBalisesValeurs[1][0]);
-	free(pcPARtabBalisesValeurs[1][1]);
-	free(pcPARtabBalisesValeurs[2][0]);
-	free(pcPARtabBalisesValeurs[2][1]);
-	free(pcPARtabBalisesValeurs[3][0]);
-	free(pcPARtabBalisesValeurs[3][1]);
+	unsigned int uiCompteur;
 
-	free(pcPARType);
-}
-
-/******************************************************************************
-PARLireMatrice
-*******************************************************************************
-Entrée : pcfilename le chemin d'accès au fichier (chaîne de caractère)
-Necessité : Le fichier existe
-Sortie : Un objet CMatrice de type MType
-Entraine : la matrice est lue puis retourné
-******************************************************************************/
-void Cparseur::PARLireMatrice(char * pcfilename)
-{
-	unsigned int uiCompteur = 0;
-	unsigned int uiCompteurpcLigne, uiCompteurpcTempMat = 0;
-	char pcLigne[256]; //Stocke une ligne du fichier sur laquelle on va faire nos opérations
-	char * pcTempMat; //Tampon utilisé dans la lecture du corps de la matrice
-	char * pcTemp; //Tampon utilisé dans la lecture de tout le fichier
-		
-	/*
-	if(pcLigne == nullptr);
-		throw Cexception(1, "Lors de l'initialisation de la methode (PARLireMatrice) 2");
-*/
-	pcTempMat = (char *) malloc(sizeof(char));
-	if(pcTempMat == nullptr)
-		throw Cexception(1, "Lors de l'initialisation de la methode (PARLireMatrice) 1");
-	pcTempMat[uiCompteurpcTempMat] = '\0';
-	
-		
-	//Ouverture du fichier
-	ifstream fichier(pcfilename, ios::in);
-	if(fichier.fail())
-		throw Cexception(5);
-
-	//Boucle tant que la fin du fichier n'est pas atteinte
-	while(fichier.getline(pcLigne, 256))
+	for( uiCompteur = 0; uiCompteur < uiPARNbrBalises; uiCompteur++)
 	{
-		//On place le compteur de la ligne au début et on la met en majuscule
-		uiCompteurpcLigne = 0;
-		_strupr_s(pcLigne, strlen(pcLigne) + 1);
-
-		pcTemp = pcLigne;//pour pouvoir manipuler la chaîne
-
-		//On cherche la première balise sur la ligne : TYPEMATRICE
-		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[0][0]);
-		if(pcTemp != nullptr)
-		{
-			pcPARtabBalisesValeurs[0][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pcPARtabBalisesValeurs[0][0], pcPARtabBalisesValeurs[0][1], pcTemp); // et on l'efface du tampon
-		}
-		
-		//On cherche la deuxième balise sur la même ligne : NBLIGNES
-		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[1][0]);
-		if(pcTemp!= nullptr)
-		{
-			pcPARtabBalisesValeurs[1][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pcPARtabBalisesValeurs[1][0], pcPARtabBalisesValeurs[1][1], pcTemp); // et on l'efface du tampon
-		}
-		
-		//On cherche la troisième balise sur la même ligne : NBCOLONNES
-		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[2][0]);
-		if(pcTemp != nullptr)
-		{
-			pcPARtabBalisesValeurs[2][1] = PARrecupererElement(pcTemp); // on récupère le dît Elmt
-			PAReffacerElmt(pcPARtabBalisesValeurs[2][0], pcPARtabBalisesValeurs[2][1], pcTemp); // et on l'efface du tampon
-		}
-		
-		//Puis on cherche la matrice : MATRICE
-		pcTemp = strstr(pcLigne, pcPARtabBalisesValeurs[3][0]);
-		if(pcTemp != nullptr)
-		{
-			//On avance jusqu'au '['
-			while(pcTemp[uiCompteurpcLigne] != '[')
-			{
-				if(pcTemp[uiCompteurpcLigne] == '\0')
-				{
-					if(!fichier.getline(pcTemp, 256))
-						throw Cexception(6, "Fin du fichier atteint, '[' attendu");
-
-					uiCompteurpcLigne = 0;
-				}
-				else
-					uiCompteurpcLigne++;
-			}
-			uiCompteurpcLigne++;
-
-			//Ensuite on prend tout jusqu'au ']' ou jusqu'à la fin du fichier
-			while(pcTemp[uiCompteurpcLigne] != ']')
-			{
-				if(pcTemp[uiCompteurpcLigne] == '\0')
-				{
-					pcTempMat = (char *) realloc(pcTempMat, sizeof(char) * (strlen(pcTempMat) + 1));
-					if(pcTempMat == nullptr)
-						throw Cexception(2, "Dans la methode PARLireMatrice");
-
-					pcTempMat[uiCompteurpcTempMat] = ' ';
-					uiCompteurpcTempMat++;
-
-					if(!fichier.getline(pcTemp, 256))
-						throw Cexception(6, "Fin du fichier atteint, ']' attendu");
-
-					uiCompteurpcLigne = 0;
-				}
-				else
-				{
-					pcTempMat = (char *) realloc(pcTempMat, sizeof(char) * (strlen(pcTempMat) + 1));
-					if(pcTempMat == nullptr)
-						throw Cexception(2, "Dans la methode PARLireMatrice");
-
-					pcTempMat[uiCompteurpcTempMat] = pcTemp[uiCompteurpcLigne];
-					uiCompteurpcLigne++;
-					uiCompteurpcTempMat++;
-				}
-			}
-			pcTempMat[uiCompteurpcTempMat] = '\0';
-			pcPARtabBalisesValeurs[3][1] = _strdup(pcTempMat);
-		}
+		free(ppcPARBalises[uiCompteur]);
+		free(pppcPARtabBalisesValeurs[uiCompteur][0]);
+		free(pppcPARtabBalisesValeurs[uiCompteur][1]);
+		delete pppcPARtabBalisesValeurs[uiCompteur];
 	}
-
-
-	//Puis test si tout a bien été récupéré
-	for(uiCompteur = 0; uiCompteur < NBRBALISES; uiCompteur++)
-	{
-		if(pcPARtabBalisesValeurs[uiCompteur][1] == nullptr)
-			throw Cexception(6, "Fin du fichier, toutes les informations n'ont pas ete renseignees");
-	}
-		
-	//et on essaie de reconnaitre le type
-	PARreconnaitreType(pcPARtabBalisesValeurs[0][1]);
-
-	//Pour finalement fermer le fichier et libérer les variables intermédiaires
-	fichier.close();
-	free(pcTempMat);
+	delete ppcPARBalises;
+	delete pppcPARtabBalisesValeurs;
 }
-
-/******************************************************************************
-PARcreerMatrice
-*******************************************************************************
-Entrée : Une matrice de chaîne de caractères contenant les données brut de la matrice
-Necessité : Les données sont cohérentes
-Sortie : Un objet CMatrice de type MType
-Entraine : L'objet retourné a bien été initialisé avec des valeurs cohérente
-******************************************************************************/
-CMatrice<double> * Cparseur::PARcreerDoubleMatrice()
-{
-	double ** ppdMatrice;
-	unsigned int uiNbrLignes, uiNbrColonnes;
-	unsigned int uiCptrLignes, uiCptrColonnes;
-
-	CMatrice<double> * dMATMatrice;
-	
-	//sept variables utilisées pour la reconnaissance des chiffres
-	char * pcfix, *pcdef;
-	char * pctemp;
-	unsigned int uicfix = 0, uicdef = 0, uitemplen = 0;
-
-	//Cette fonction ne peut retourner qu'une matrice de type double
-	if(strcmp(pcPARType, DOUBLE) != 0)
-		return nullptr;
-
-
-	uiNbrLignes = PARreconnaitreTaille(pcPARtabBalisesValeurs[1][1]);
-	uiNbrColonnes = PARreconnaitreTaille(pcPARtabBalisesValeurs[2][1]);
-
-	ppdMatrice = new double*[uiNbrLignes];
-	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
-		ppdMatrice[uiCptrLignes] = new double[uiNbrColonnes];
-	
-	pcfix = pcPARtabBalisesValeurs[3][1];
-	pcdef = pcPARtabBalisesValeurs[3][1];
-	pctemp = (char *)malloc(uitemplen + 1);
-	pctemp[0] = '\0';
-
-	for(uiCptrLignes = 0; uiCptrLignes < uiNbrLignes; uiCptrLignes++)
-	{
-		for(uiCptrColonnes = 0; uiCptrColonnes < uiNbrColonnes; uiCptrColonnes++)
-		{
-			while(pcfix[uicfix] == ' ' && pcfix[uicfix] != '\0') uicfix++;
-			uicdef = uicfix;
-			while(pcdef[uicdef] != ' ' && pcdef[uicdef] != '\0') uicdef++;
-
-			if(pcfix[uicfix] == '\0')
-			{
-				free(pctemp);
-				throw Cexception(6, "La taille de la Matrice lue ne correspond pas a la taille reelle");
-			}
-
-			for(int i = 0; uicfix + i < uicdef; i++)
-			{
-				uitemplen ++;
-				pctemp = (char *)realloc(pctemp, uitemplen + 1);
-				pctemp[i] = pcfix[uicfix + i];
-				pctemp[i + 1] = '\0';
-			}
-			ppdMatrice[uiCptrLignes][uiCptrColonnes] = atof(pctemp);
-			uicfix = uicdef;
-			uitemplen = 0;
-			pctemp = (char *)realloc(pctemp, uitemplen + 1);
-			pctemp[0] = '\0';
-		}
-	}
-
-	dMATMatrice = new CMatrice<double>(ppdMatrice, uiNbrLignes, uiNbrColonnes);
-	
-	delete ppdMatrice;
-	free(pctemp);
-	
-	return dMATMatrice;
-}
-
-/******************************************************************************
-PARreconnaitreType
-*******************************************************************************
-Entrée : une chaîne de caractères
-Necessité : Néant
-Sortie : Le type détecté (chaîne de caractères prédéfinie) ou nullptr si pas de type reconnu
-Entraine : Le bon type a été détecté ou aucun ne l'a été
-******************************************************************************/
-void Cparseur::PARreconnaitreType(char * pcElm)
-{
-	_strupr_s(pcElm, strlen(pcElm) + 1);
-	if(strcmp(pcElm, DOUBLE) == 0)
-		pcPARType= _strdup(DOUBLE);
-	else if(strcmp(pcElm, INTEGER) == 0)
-		pcPARType = _strdup(INTEGER);
-	else if(strcmp(pcElm, FLOAT) == 0)
-		pcPARType = _strdup(FLOAT);
-	else if(strcmp(pcElm, CHARACTER) == 0)
-		pcPARType = _strdup(CHARACTER);
-	else
-		pcPARType = nullptr;
-	
-	if(pcPARType == nullptr || strcmp(pcPARType, DOUBLE) != 0)
-	{
-		throw Cexception(6, "Type inconnu (cette version ne prend en compte que le type Double)");
-	}
-
-	pcPARtabBalisesValeurs[0][1] = _strdup(pcPARType);
-}
-
-/******************************************************************************
-PARgetType
-*******************************************************************************
-Entrée : Rien
-Necessité : Néant
-Sortie : Retourne la valeur non modifiable du type de la dernière matrice nulle
-Entraine : L'objet a été initialisé
-******************************************************************************/
-inline const char * Cparseur::PARgetType()
-{
-	return (const char *)pcPARType;
-}
-
-/******************************************************************************
-PARreconnaitreTaille
-*******************************************************************************
-Entrée : une chaîne de caractères
-Necessité : le paramètre est convertible en int
-Sortie : L'entier détecté
-Entraine : L'entier retourné est une taille valide
-******************************************************************************/
-unsigned int Cparseur::PARreconnaitreTaille(char * pcElm)
-{
-	long int liTemp;
-	//on utilise strtol au cas où l'utilisateur aurait rentré un long ou un double au lieu d'un int
-	liTemp = strtol(pcElm, NULL, 0);
-	if(liTemp == 0L || liTemp == liTemp * (-1))
-		throw Cexception(6, "Impossible de reconnaitre la taille donnee pour la matrice");
-
-	if(liTemp < 0)
-		throw Cexception(6, "La taille de la matrice doit etre positive");
-
-	return (unsigned int)liTemp;
-}
-
-/******************************************************************************
-PARrecupererElement
-*******************************************************************************
-Entrée : une chaîne de caractères
-Necessité : La balise est associé à un élément
-Sortie : L'élément associé à la balise (chaîne de caractère)
-Entraine : Un élément a été détecté et retourné
-******************************************************************************/
-char * Cparseur::PARrecupererElement(char * pcElm)
-{
-	char * pcTemp;
-	char * pcRetour = nullptr;
-	unsigned int uiCptr = 0;
-
-	pcTemp = strchr(pcElm, '=');
-	if(pcTemp == nullptr)
-		throw Cexception(6, "Pas de valeur detecte");
-
-	if(*(pcTemp) != '\0')
-	{
-		pcTemp++;
-		while(*(pcTemp) == ' ' && *(pcTemp) != '\0')
-			pcTemp++;
-		if(*pcTemp == '\0')
-			throw Cexception(6, "Pas de valeur detecte");
-
-		while(*(pcTemp) != ' ' && *(pcTemp) != '\0')
-		{
-			if(pcRetour == nullptr)
-			{
-				pcRetour = (char*)malloc(sizeof(char));
-				if(pcRetour == nullptr)
-					throw Cexception(1, "Dans la fonction PARrecupererElement");
-			}
-			else
-				pcRetour = (char *)realloc(pcRetour, sizeof(char) *(strlen(pcRetour) + 1));
-
-			pcRetour[uiCptr] = *pcTemp;
-			pcTemp++;
-			uiCptr++;
-		}
-		pcRetour[uiCptr] = '\0';
-	}
-	else pcRetour = nullptr;
-
-	if(pcRetour == nullptr || strlen(pcRetour) == 0)
-		throw Cexception(6, "Pas de valeur trouve pour la matrice, elle doit se trouver sur la meme ligne que la balise");
-
-	return pcRetour;
-}
-
-/******************************************************************************
-PAReffacerElmt
-*******************************************************************************
-Entrée : trois chaînes de caractères : les deux élément à supprimer de la troisième
-Necessité : Néant
-Sortie : Rien
-Entraine : Les deux chaînes et le égal ont été supprimés de la chaîne pcSrc
-******************************************************************************/
-void Cparseur::PAReffacerElmt(char * pcElmt, char * pcValeur, char * pcSrc)
-{
-	unsigned int uiCptrBalise, uiCptrValeur;
-
-	//On efface la balise
-	for(uiCptrBalise = 0; uiCptrBalise < strlen(pcElmt); uiCptrBalise++)
-		pcSrc[uiCptrBalise] = ' ';
-
-	//On efface les blancs et l'égal
-	while (pcSrc[uiCptrBalise] == ' ' || pcSrc[uiCptrBalise] == '=')
-	{
-		pcSrc[uiCptrBalise] = ' ';
-		uiCptrBalise++;
-	}
-
-	//On efface la valeur
-	for(uiCptrValeur = 0; uiCptrValeur < strlen(pcValeur); uiCptrValeur++)
-		pcSrc[uiCptrBalise + uiCptrValeur] = ' ';
-}
-
 
 /******************************************************************************
 surcharge de l'opérateur d'affectation
@@ -433,34 +89,256 @@ surcharge de l'opérateur d'affectation
 ******************************************************************************/
 Cparseur & Cparseur::operator=(Cparseur const & PARparseur)
 {
-	free(pcPARtabBalisesValeurs[0][1]);
-	free(pcPARtabBalisesValeurs[1][1]);
-	free(pcPARtabBalisesValeurs[2][1]);
-	free(pcPARtabBalisesValeurs[3][1]);
-	free(pcPARType);
+	unsigned int uiCompteur;
+	
+	ppcPARBalises = new char*[PARparseur.uiPARNbrBalises];
+	pppcPARtabBalisesValeurs = new char**[PARparseur.uiPARNbrBalises];
+	uiPARNbrBalises = PARparseur.uiPARNbrBalises;
 
-	pcPARtabBalisesValeurs[0][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[0][1]);
-	pcPARtabBalisesValeurs[1][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[1][1]);
-	pcPARtabBalisesValeurs[2][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[2][1]);
-	pcPARtabBalisesValeurs[3][1] = _strdup(PARparseur.pcPARtabBalisesValeurs[3][1]);
-
-	pcPARType = _strdup(PARparseur.pcPARType);
-
+	for(uiCompteur = 0; uiCompteur < PARparseur.uiPARNbrBalises; uiCompteur++)
+	{
+		ppcPARBalises[uiCompteur] = _strdup(PARparseur.ppcPARBalises[uiCompteur]);
+		pppcPARtabBalisesValeurs[uiCompteur] = new char*[2];
+		pppcPARtabBalisesValeurs[uiCompteur][0] = _strdup(PARparseur.pppcPARtabBalisesValeurs[uiCompteur][0]);
+		pppcPARtabBalisesValeurs[uiCompteur][1] = _strdup(PARparseur.pppcPARtabBalisesValeurs[uiCompteur][1]);
+	}
 	return *this;
 }
 
 /******************************************************************************
-PAREnregistrerMatrice
-
-~~~~~~~Fonction vide préparée pour une possible amélioration de la classe~~~~~~
-
+PARLire (inspiré par les méthodes de compilation)
 *******************************************************************************
-Entrée : pcfilename le chemin d'accès au fichier (chaine de caractère), une matrice de type MType
-Necessité : le chemin d'accès est valide
+Entrée : pcfilename le chemin d'accès au fichier (chaîne de caractère)
+Necessité : Le fichier existe et les données dont au bon format dans le fichier
 Sortie : Rien
-Entraine : La matrice a été enregistré au bon format récupérable dans le bon fichier
+Entraine : les données sont lues et stockées sous format brut
 ******************************************************************************/
-template<typename MType> void Cparseur::PAREnregistrerMatrice(char * pcfilename, CMatrice<MType> & MTMATMatrice) // Pour une possible extension
+void Cparseur::PARLire(char* pcfilename)
 {
+	char cLecture;
+	char * pcTemp = (char *)malloc(sizeof(char));
+	if(pcTemp == nullptr)
+		throw Cexception(ERREUR_ALLOCATION, "Dans PARLire");
+	pcTemp[0] = '\0';
+	char * pcBaliseActuelle;
+	bool bLectureBalise = true, bLectureValeur = false, bLectureMultiple = false;
+	unsigned int uiCompteur, uiCptrTemp = 0;
 
+	//Ouverture du fichier
+	ifstream fichier(pcfilename, ios::in);
+	if(fichier.fail())
+		throw Cexception(ERREUR_FICHIER);
+
+	while(fichier.get(cLecture))
+	{
+		//On met le caractère en majuscule
+		if(!bLectureMultiple && cLecture >= 'a' && cLecture <= 'z')
+			cLecture = cLecture - 'a' + 'A';
+
+		//Ensuite on teste chaque valeur possible
+		switch(cLecture)
+		{
+		case '=' :
+			bLectureBalise = false;
+			if(!bLectureValeur && !bLectureMultiple)
+			{
+				pcBaliseActuelle = PARreconnaitreBalise(pcTemp);
+				bLectureValeur = true;
+				uiCptrTemp = 0;
+				pcTemp = (char *)realloc(pcTemp, sizeof(char));
+				if(pcTemp == nullptr)
+					throw Cexception(ERREUR_REALLOCATION);
+				pcTemp[uiCptrTemp] = '\0';
+			}
+			else
+			if(bLectureMultiple)
+			{	
+				uiCptrTemp++;
+				pcTemp = (char *)realloc(pcTemp, (uiCptrTemp + 1) * sizeof(char));
+				if(pcTemp == nullptr)
+					throw Cexception(ERREUR_REALLOCATION);
+				pcTemp[uiCptrTemp - 1] = cLecture;
+				pcTemp[uiCptrTemp] = '\0';
+			}
+			else if(!bLectureMultiple)
+				throw Cexception(ERREUR_PARSEUR, "= non attendu");
+			break;
+		case ' ' :
+		case '\n' :
+			if(bLectureValeur && !bLectureMultiple && pcTemp[0] != '\0')
+			{
+				PARstockerValeur(pcBaliseActuelle, pcTemp);
+				uiCptrTemp = 0;
+				pcTemp = (char *)realloc(pcTemp, sizeof(char));
+				if(pcTemp == nullptr)
+					throw Cexception(ERREUR_REALLOCATION);
+				pcTemp[uiCptrTemp] = '\0';
+				bLectureValeur = false;
+				bLectureBalise = true;
+			}
+			if(bLectureMultiple)
+			{	
+				if(*pcTemp != '\0')
+				{
+					uiCptrTemp++;
+					pcTemp = (char *)realloc(pcTemp, (uiCptrTemp + 1) * sizeof(char));
+					if(pcTemp == nullptr)
+						throw Cexception(ERREUR_REALLOCATION);
+					pcTemp[uiCptrTemp - 1] = ' ';
+					pcTemp[uiCptrTemp] = '\0';
+				}
+			}
+			break;
+		case '[' :
+			if(bLectureValeur && !bLectureMultiple)
+				bLectureMultiple = true;
+			else
+				throw Cexception(ERREUR_PARSEUR, "[ non attendu");
+			break;
+		case ']' :
+			if(bLectureValeur && bLectureMultiple)
+			{
+				bLectureValeur = false;
+				bLectureMultiple = false;
+				bLectureBalise = true;
+				PARstockerValeur(pcBaliseActuelle, pcTemp);
+				uiCptrTemp = 0;
+				pcTemp = (char *)realloc(pcTemp, sizeof(char));
+				if(pcTemp == nullptr)
+					throw Cexception(ERREUR_REALLOCATION);
+				pcTemp[uiCptrTemp] = '\0';
+			}
+			else
+				throw Cexception(ERREUR_PARSEUR, "] non attendu");
+			break;
+		default :
+			if(!bLectureBalise)
+				bLectureValeur = true;
+			uiCptrTemp++;
+			pcTemp = (char *)realloc(pcTemp, (uiCptrTemp + 1) * sizeof(char));
+			if(pcTemp == nullptr)
+				throw Cexception(ERREUR_REALLOCATION);
+			pcTemp[uiCptrTemp - 1] = cLecture;
+			pcTemp[uiCptrTemp] = '\0';
+			break;
+		}
+	}
+	
+	//Finalement test si tout a bien été récupéré
+	for(uiCompteur = 0; uiCompteur < uiPARNbrBalises; uiCompteur++)
+	{
+		if(pppcPARtabBalisesValeurs[uiCompteur][1] == nullptr)
+			throw Cexception(ERREUR_PARSEUR, "Fin du fichier, toutes les informations n'ont pas ete renseignees");
+	}
+
+	//Pour enfin fermer le fichier et libérer les variables intermédiaires
+	fichier.close();
+	free(pcTemp);
+}
+
+/******************************************************************************
+PARreconnaitreBalise
+*******************************************************************************
+Entrée : pcSource(chaîne de caractère)
+Necessité : Rien
+Sortie : chaîne de caractères la balise reconnue
+Entraine : La balise est reconnue ou levée d'une exception
+******************************************************************************/
+char * Cparseur::PARreconnaitreBalise(char * pcSource)
+{
+	unsigned int uiCptr;
+
+	if(pcSource == nullptr)
+		throw Cexception(ERREUR_PARAM);
+
+	for(uiCptr = 0; uiCptr < uiPARNbrBalises; uiCptr++)
+		if(strcmp(pppcPARtabBalisesValeurs[uiCptr][0],pcSource) == 0)
+			return pppcPARtabBalisesValeurs[uiCptr][0];
+
+	throw Cexception(ERREUR_PARSEUR, "Balise inconnue");
+}
+
+/******************************************************************************
+PARstockerValeur
+*******************************************************************************
+Entrée : (2 chaînes de caractères)pcBalise et pcValeur, la valeur à stocker dans la balise
+Necessité : Le fichier existe
+Sortie : Un objet Cmatrice de type MType
+Entraine : la matrice est lue puis retourné
+******************************************************************************/
+void Cparseur::PARstockerValeur(char * pcBalise, char * pcValeur)
+{
+	unsigned int uiCptr;
+
+	if(pcBalise == nullptr || pcValeur == nullptr)
+		throw Cexception(ERREUR_PARAM);
+
+	for(uiCptr = 0; uiCptr < uiPARNbrBalises; uiCptr++)
+		if(strcmp(pppcPARtabBalisesValeurs[uiCptr][0], pcBalise) == 0)
+			pppcPARtabBalisesValeurs[uiCptr][1] = _strdup(pcValeur);
+}
+
+/******************************************************************************
+PARvaleurSuivante
+*******************************************************************************
+Entrée : (2 chaînes de caractères)pcBalise et pcChaine
+Necessité : il y a une valeur associée à la balise dans la chaîne de caractère
+Sortie : une chaine de caractère, la valeur associée
+Entraine : la valeur est trouvée, renvoiée et éffacé de la chaîne de caractère
+******************************************************************************/
+char * Cparseur::PARvaleurSuivante(char * pcBalise, char * pcChaine)
+{
+	char * pcTemp;
+	char * pcRetour;
+	unsigned int uiCompteur;
+
+	if(pcBalise == nullptr || pcBalise == nullptr)
+		throw Cexception(ERREUR_PARAM);
+
+	//On met tout en majuscule
+	for(uiCompteur = 0; uiCompteur < strlen(pcChaine); uiCompteur++)
+		if(pcChaine[uiCompteur] >= 'a' && pcChaine[uiCompteur] <= 'z')
+			pcChaine[uiCompteur] = pcChaine[uiCompteur] - 'a' + 'A';
+
+	pcTemp = strstr(pcChaine, pcBalise);
+	if(pcTemp == nullptr)
+		throw Cexception(ERREUR_PARSEUR, "Balise non trouvee");
+
+	//On va jusqu'au égal en supprimant la balise
+	while(*pcTemp != '=')
+	{
+		if(*pcTemp == '\0')
+			throw Cexception(ERREUR_PARSEUR, "Valeur non trouvee");
+		*pcTemp = ' ';
+		pcTemp++;
+	}
+	//Ensuite on supprime le égal et tout les espace
+	while(*pcTemp == '=' || *pcTemp == ' ' || *pcTemp == '\n')	
+	{
+		if(*pcTemp == '\0')
+			throw Cexception(ERREUR_PARSEUR, "Valeur non trouvee");
+		*pcTemp = ' ';
+		pcTemp++;
+	}
+	//Puis on retire la valeur de la chaine pour la renvoyer
+	uiCompteur = 0;
+	pcRetour = (char *)malloc(uiCompteur + 1);
+	if(pcRetour == nullptr)
+		throw Cexception(ERREUR_ALLOCATION, "Dans PARValeurSuivante");
+	pcRetour[uiCompteur] = '\0';
+	
+	while(*pcTemp != ' ' && *pcTemp != '\n')
+	{
+		if(*pcTemp == '\0')
+			throw Cexception(ERREUR_PARSEUR, "Valeur non trouvee");
+		uiCompteur++;
+		pcRetour = (char *)realloc(pcRetour, uiCompteur + 1);
+		if(pcRetour == nullptr)
+			throw Cexception(ERREUR_REALLOCATION);
+		pcRetour[uiCompteur - 1] = *pcTemp;
+		pcRetour[uiCompteur] = '\0';
+		*pcTemp = ' ';
+		pcTemp++;
+	}
+	return pcRetour;
 }

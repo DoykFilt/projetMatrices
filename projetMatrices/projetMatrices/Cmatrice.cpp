@@ -1,4 +1,4 @@
-#include "CMatrice.h"
+#include "Cmatrice.h"
 #include "Cexception.h"
 
 /******************************************************************************
@@ -9,14 +9,14 @@ Constructeur par défaut
 	Sortie : Rien
 	Entraine : L'objet en cours est initialisé.
 ******************************************************************************/
-template<class MType> CMatrice<MType>::CMatrice()
+template<class MType> Cmatrice<MType>::Cmatrice()
 {
 	uiMATnbLignes = 0;
 	uiMATnbColonnes = 0;
 
 	ppMTMATMatrice = (MType **)malloc(0);
 	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Dans le constructeur de CMatrice");
+		throw Cexception(2, "Dans le constructeur de Cmatrice");
 }
 
 /******************************************************************************
@@ -27,7 +27,7 @@ Constructeur de recopie
 	Sortie : Rien
 	Entraine : L'objet en cours est initialisé par recopie
 ******************************************************************************/
-template<class MType> CMatrice<MType>::CMatrice(const CMatrice<MType> & MTMATMatrice)
+template<class MType> Cmatrice<MType>::Cmatrice(const Cmatrice<MType> & MTMATMatrice)
 {
 	unsigned int uiCompteurLignes;
 	unsigned int uiCompteurColonnes;
@@ -37,13 +37,13 @@ template<class MType> CMatrice<MType>::CMatrice(const CMatrice<MType> & MTMATMat
 
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
 	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+		throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+			throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = MTMATMatrice.ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes];
@@ -58,7 +58,7 @@ Constructeur de confort 1
 	Sortie : Rien
 	Entraine : L'objet en cours est initialisé.
 ******************************************************************************/
-template<class MType> CMatrice<MType>::CMatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes)
+template<class MType> Cmatrice<MType>::Cmatrice(MType ** & ppMTMatrice, unsigned int uiLignes, unsigned int uiColonnes)
 {
 	unsigned int uiCompteurLignes;
 	unsigned int uiCompteurColonnes;
@@ -67,13 +67,13 @@ template<class MType> CMatrice<MType>::CMatrice(MType ** & ppMTMatrice, unsigned
 	uiMATnbColonnes = uiColonnes;
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
 	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+		throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+			throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMatrice[uiCompteurLignes][uiCompteurColonnes];
@@ -86,9 +86,9 @@ Constructeur de confort 2
 	Entrée : uiLignes et uiColonnes deux naturels
 	Necessité : Néant
 	Sortie : Rien
-	Entraine : L'objet en cours est initialisé, sa matrice est de taille uiLignes * uiColonnes remplir de 0;
+	Entraine : L'objet en cours est initialisé, sa matrice est de taille uiLignes * uiColonnes remplie de 0;
 ******************************************************************************/
-template<class MType> CMatrice<MType>::CMatrice(unsigned int uiLignes, unsigned int uiColonnes)
+template<class MType> Cmatrice<MType>::Cmatrice(unsigned int uiLignes, unsigned int uiColonnes)
 {
 	unsigned int uiCompteurLignes;
 	unsigned int uiCompteurColonnes;
@@ -97,13 +97,13 @@ template<class MType> CMatrice<MType>::CMatrice(unsigned int uiLignes, unsigned 
 	uiMATnbColonnes =uiColonnes;
 	ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbLignes);
 	if(ppMTMATMatrice == nullptr)
-		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+		throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 	{
 		ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbColonnes);
 		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
+			throw Cexception(2, "Dans le constructeur de recopie de Cmatrice");
 
 		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbColonnes; uiCompteurColonnes++)
 			ppMTMATMatrice[uiCompteurLignes][uiCompteurColonnes] = (MType)0;
@@ -118,49 +118,13 @@ Destructeur
 	Sortie : Rien
 	Entraine : L'objet en cours désalloué
 ******************************************************************************/
-template<class MType> CMatrice<MType>::~CMatrice()
+template<class MType> Cmatrice<MType>::~Cmatrice()
 {
 	unsigned int uiCompteurLignes;
 
 	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 		free(ppMTMATMatrice[uiCompteurLignes]);
 	free(ppMTMATMatrice);
-}
-
-/******************************************************************************
-MTMATTransposeeMatrice
-*******************************************************************************
-	Entrée : Rien
-	Necessité : Néant
-	Sortie : référence sur un objet de type CMatrice<MType>
-	Entraine : Retourne la transposée de la matrice
-******************************************************************************/
-template<class MType> CMatrice<MType> & CMatrice<MType>::MTMATTransposeeMatrice() const
-{
-	unsigned int uiCompteurLignes, uiCompteurColonnes;
-	CMatrice<MType> * MTMATMatrice;
-
-	MType ** ppMTMatrice = (MType **)malloc(sizeof(MType *) * uiMATnbColonnes);
-	if(ppMTMatrice == nullptr)
-		throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
-
-	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbColonnes; uiCompteurLignes++)
-	{
-		ppMTMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * uiMATnbLignes);
-		if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-			throw Cexception(2, "Dans le constructeur de recopie de CMatrice");
-
-		for(uiCompteurColonnes = 0; uiCompteurColonnes < uiMATnbLignes; uiCompteurColonnes++)
-			ppMTMatrice[uiCompteurLignes][uiCompteurColonnes] = ppMTMATMatrice[uiCompteurColonnes][uiCompteurLignes];
-	}
-	
-	MTMATMatrice = new CMatrice<MType>(ppMTMatrice, uiCompteurLignes, uiCompteurColonnes);
-
-	for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbColonnes; uiCompteurLignes++)
-		free(ppMTMatrice[uiCompteurLignes]);
-	free(ppMTMatrice);
-
-	return *MTMATMatrice;
 }
 
 /******************************************************************************
@@ -171,7 +135,7 @@ MATAfficherMatrice
 	Sortie : Rien
 	Entraine : Affiche la matrice
 ******************************************************************************/
-template<class MType> void CMatrice<MType>::MTMATAfficherMatrice() const
+template<class MType> void Cmatrice<MType>::MTMATAfficherMatrice() const
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 
@@ -191,7 +155,7 @@ MTMATgetNbLignes
 	Sortie : naturel
 	Entraine : Retourne le nombre de lignes de la matrice
 ******************************************************************************/
-template<class MType> inline unsigned int CMatrice<MType>::MTMATgetNbLignes() const
+template<class MType> inline unsigned int Cmatrice<MType>::MTMATgetNbLignes() const
 {
 	return uiMATnbLignes;
 }
@@ -204,7 +168,7 @@ MTMATgetNbColonnes
 	Sortie : naturel
 	Entraine : Retourne le nombre de colonnes de la matrice
 ******************************************************************************/
-template<class MType> inline unsigned int CMatrice<MType>::MTMATgetNbColonnes() const
+template<class MType> inline unsigned int Cmatrice<MType>::MTMATgetNbColonnes() const
 {
 	return uiMATnbColonnes;
 }
@@ -217,7 +181,7 @@ MTMATget
 	Sortie : MType
 	Entraine : Retourne l'élément de la matrice à la ligne uiLigne et à la colonne uiColonne
 ******************************************************************************/
-template<class MType> inline MType CMatrice<MType>::MTMATget(unsigned int uiLigne, unsigned int uiColonne) const
+template<class MType> inline MType Cmatrice<MType>::MTMATget(unsigned int uiLigne, unsigned int uiColonne) const
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
 		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATget)");
@@ -233,7 +197,7 @@ MTMATset
 	Sortie : Rien
 	Entraine : L'élément à la position uiLigne, uiColonnes a été remplacé
 ******************************************************************************/
-template<class MType> inline void CMatrice<MType>::MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur)
+template<class MType> inline void Cmatrice<MType>::MTMATset(unsigned int uiLigne, unsigned int uiColonne, MType MTValeur)
 {
 	if(uiLigne > uiMATnbLignes || uiColonne > uiMATnbColonnes)
 		throw Cexception(4, "Indices en parametre trop grands (Methode MTMATset)");
@@ -249,7 +213,7 @@ MTMATsetMatrice
 	Sortie : Rien
 	Entraine : Les attributs de l'objet ont été remplacés
 ******************************************************************************/
-template<class MType> inline void CMatrice<MType>::MTMATsetMatrice(const MType ** ppMTMatrice, const unsigned int uiLignes, const unsigned int uiColonnes)
+template<class MType> inline void Cmatrice<MType>::MTMATsetMatrice(const MType ** ppMTMatrice, const unsigned int uiLignes, const unsigned int uiColonnes)
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 
@@ -294,7 +258,7 @@ surcharge de l'opérateur d'affectation
 	Sortie : Une référence sur l'objet en cours qui a été modifié
 	Entraine : L'objet en cours est une copie de l'objet en paramètre
 ******************************************************************************/
-template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MType> const & MTMATMatrice)
+template<class MType> Cmatrice<MType> & Cmatrice<MType>::operator=(Cmatrice<MType> const & MTMATMatrice)
 {
 	unsigned int uiCompteurLignes, uiCompteurColonnes;
 
@@ -303,14 +267,14 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 	{
 		ppMTMATMatrice = (MType **)malloc(sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
 		if(ppMTMATMatrice == nullptr)
-			throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+			throw Cexception(2, "Lors d'une affectation d'une Cmatrice dans une autre");
 		uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
 		
 		for(uiCompteurLignes = 0; uiCompteurLignes < uiMATnbLignes; uiCompteurLignes++)
 		{
 			ppMTMATMatrice[uiCompteurLignes] = (MType *)malloc(sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
 			if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+				throw Cexception(2, "Lors d'une affectation d'une Cmatrice dans une autre");
 		}
 		uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
 	}
@@ -320,7 +284,7 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 		{
 			ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
 			if(ppMTMATMatrice == nullptr)
-				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+				throw Cexception(2, "Lors d'une affectation d'une Cmatrice dans une autre");
 		}
 		else if(MTMATMatrice.uiMATnbLignes < uiMATnbLignes)
 		{
@@ -328,7 +292,7 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 				free(ppMTMATMatrice[uiCompteurLignes]);
 			ppMTMATMatrice = (MType **)realloc(ppMTMATMatrice, sizeof(MType *) * MTMATMatrice.uiMATnbLignes);
 			if(ppMTMATMatrice == nullptr)
-				throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+				throw Cexception(2, "Lors d'une affectation d'une Cmatrice dans une autre");
 		}
 		uiMATnbLignes = MTMATMatrice.uiMATnbLignes;
 
@@ -338,7 +302,7 @@ template<class MType> CMatrice<MType> & CMatrice<MType>::operator=(CMatrice<MTyp
 			{
 				ppMTMATMatrice[uiCompteurLignes] = (MType *)realloc(ppMTMATMatrice[uiCompteurLignes], sizeof(MType) * MTMATMatrice.uiMATnbColonnes);
 				if(ppMTMATMatrice[uiCompteurLignes] == nullptr)
-					throw Cexception(2, "Lors d'une affectation d'une CMatrice dans une autre");
+					throw Cexception(2, "Lors d'une affectation d'une Cmatrice dans une autre");
 			}
 		}
 		uiMATnbColonnes = MTMATMatrice.uiMATnbColonnes;
