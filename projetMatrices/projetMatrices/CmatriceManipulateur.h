@@ -15,6 +15,10 @@ template <class MType> CmatriceManipulateur
 		Entraine : Retourne la transposée de la matrice
 	******************************************************************************/
 	Cmatrice<MType> & MTMAMTransposeeMatrice(Cmatrice<MType> * MTMATmatrice) const;
+
+	CMatrice<MType> & MTMATEchelonnageMatrice()const;
+	unsigned int MTMATCalculRang();
+
 };
 
 #include "CmatriceManipulateur.cpp"

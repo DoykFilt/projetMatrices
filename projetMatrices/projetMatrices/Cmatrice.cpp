@@ -314,3 +314,113 @@ template<class MType> Cmatrice<MType> & Cmatrice<MType>::operator=(Cmatrice<MTyp
 
 	return *this;
 }
+
+
+
+
+
+/************************************************************************************************************************************************************
+MTMATEchelonnageMatrice
+*************************************************************************************************************************************************************
+	Entrée : Rien
+	Necessité : Néant
+	Sortie : référence sur un objet de type CMatrice<MType>
+	Entraine : Retourne la matrice echelonnée
+************************************************************************************************************************************************************/
+template<class MType> CMatrice<MType> & CMatrice<MType>::MTMATEchelonnageMatrice() const
+{
+	//constructeur de recopie de la matrice existante
+	CMatrice<MType> * MTMATMatrice = new CMatrice(* MTMATMatrice);
+
+	//compteurs de parcours de la matrice pour les différents calculs
+	unsigned int uiCompteurLignes, uiCompteurColonnes; 	
+	unsigned int uiCompteurColonnesInterne;
+
+	//  = r  ligne dernier pivot trouvé
+	unsigned int uiDernierPivot=0; 
+	
+	//position du pivot d'une colonne
+	unsigned int uiPositionPivot; 
+
+	//valeur du pivot + tampon pour inversion des lignes -> voir nommage
+	MType pivot; 
+	MType tamponInversion;
+
+	//boucle exterieure, pour réduire avec un pivot sur chaque colonne
+	for(uiCompteurColonnes=0, uiCompteurColonnes< uiMATnbColonnes, uiCompteurColonnes++)
+	{
+		//pivot initialise comme la valeur a la ligne apres celle du dernier pivot + num ligne
+		pivot = MTMATMatrice[uiCompteurColonnes][uiDernierPivot];
+		uiPositionPivot = uiDernierPivot;
+
+		//parcours des lignes pour trouver le max -> nouveau pivot
+		for(uiCompteurLignes=uiPositionPivot+1, uiCompteurLignes<uiMATnbLignes, uiCompteurLignes++)
+		{
+			if(pivot < abs(Matrice[uiCompteurColonnes][uiCompteurLignes]))
+			{
+				//remplacement du pivot et du num ligne
+				pivot = MTMATMatrice[uiCompteurColonnes][uiCompteurLignes];
+				uiPositionPivot = uiCompteurLignes;
+			}
+		}
+
+		if(pivot !=0)
+		{
+			//division de la ligne du pivot pour mettre celui ci a 1
+			//inversion entre ligne pivot et ancien pivot +1 
+			for(uiCompteurColonnesInterne=0, uiCompteurColonnesInterne < uiMATnbColonnes, uiCompteurColonnesInterne++)
+			{
+				MTMATMatrice[uiCompteurColonnesInterne][uiPositionPivot]/=pivot;
+				tamponInversion =MTMATMatrice[uiCompteurColonnesInterne][uiPositionPivot];
+				MTMATMatrice[uiCompteurColonnesInterne][uiPositionPivot] = MTMATMatrice[uiCompteurColonnesInterne][uiDernierPivot];
+				MTMATMatrice[uiCompteurColonnesInterne][uiDernierPivot] = MTMATMatrice[uiCompteurColonnesInterne][uiPositionPivot];
+			}
+			uiPositionPivot = uiDernierPivot; // remplacement ligne pivot par sa nouvelle valeur
+
+			//soustraction des lignes par celle du pivot multiplié par le valeur sur ligne pivot -> mise a zero de la colonne du pivot
+			for(uiCompteurLignes=0, uiCompteurLignes < uiMATnbLignes, uiCompteurLignes++)
+			{
+				if(uiCompteurLignes != uiDernierPivot)
+				{
+					for(uiCompteurColonnesInterne=0, uiCompteurColonnesInterne < uiMATnbColonnes, uiCompteurColonnesInterne++)
+						MTMATMatrice[uiCompteurColonnesInterne][uiCompteurLignes] -= MTMATMatrice[uiCompteurColonnes][uiCompteurLignes] * MTMATMatrice[uiCompteurColonnesInterne][uiPositionPivot];
+				}
+			}
+			uiDernierPivot++;
+		}
+		else
+			throw Cexception(4, "matrice non inversible"); // warning ? non necessaire pour l'echelonnage
+
+	}
+	return *MTMATMatrice;
+}
+
+
+/************************************************************************************************************************************************************
+MTMATCalculRang
+*************************************************************************************************************************************************************
+	Entrée : Rien
+	Necessité : matrice echelonnée en parametre
+	Sortie : Rang de la matrice echelonnée
+	Entraine : Néant
+************************************************************************************************************************************************************/
+template<class MType> unsigned int CMatrice<MType>::MTMATCalculRang()
+{
+	unsigned int uiRang=0;
+	unsigned int uiCompteurLignes, uiCompteurColonnes; 
+	bool bLigneVide;
+	
+	for(uiCompteurLignes=0, uiCompteurLignes < uiMATnbLignes, uiCompteurLignes++)
+	{
+		bLigneVide=true;
+		for(uiCompteurColonnes=0, uiCompteurColonnes < uiMATnbColonnes, uiCompteurColonnes++)
+		{
+			if(ppMTMATMatrice[uiCompteurColonnes][uiCompteurLignes] != 0)
+				bLigneVide=false;
+		}
+		if(bLigneVide == false)
+			uiRang++;
+	}
+
+	return uiRang;
+}
