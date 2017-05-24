@@ -3,9 +3,9 @@
 
 #include "Cmatrice.h"
 
-template <class MType> CmatriceManipulateur
+template <class MType> class CmatriceManipulateur
 {
-	
+public :
 	/******************************************************************************
 	MTMATTransposeeMatrice
 	*******************************************************************************
@@ -16,8 +16,8 @@ template <class MType> CmatriceManipulateur
 	******************************************************************************/
 	Cmatrice<MType> & MTMAMTransposeeMatrice(Cmatrice<MType> * MTMATmatrice) const;
 
-	CMatrice<MType> & MTMATEchelonnageMatrice()const;
-	unsigned int MTMATCalculRang();
+	Cmatrice<MType> & MTMATEchelonnageMatrice(Cmatrice<MType> * MTMATmatrice) const;
+	unsigned int MTMATCalculRang(Cmatrice<MType> * MTMATmatrice);
 
 };
 

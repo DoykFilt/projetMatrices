@@ -2,31 +2,27 @@
 #include "Cmatrice.h"
 #include "Cparseur.h"
 #include "CmatriceGenerateur.h"
+#include "CmatriceManipulateur.h"
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 using namespace std;
 
 void main(int argc, char * argv[])
 {
-		/*
+	try
+	{
 		argc = 2;
-		argv[1] = "matrice.txt";*/
+		argv[1] = "matrice.txt";
 
-		unsigned int uiCmptr, uiNbrMatrice = 0;
-		double dValeur;
-		Cmatrice<double> ** ppdMATListeMatrice = nullptr;
-		Cmatrice<double> * pdMATTemp = nullptr;
+		Cmatrice<double> * pdMATMatrice = nullptr;
+		Cmatrice<double> * pdMATtemp = nullptr;
 		Cparseur * pPARparseur = nullptr;
 		CmatriceGenerateur * pMGRmatriceGenerateur = new CmatriceGenerateur();
+		CmatriceManipulateur<double> * pMMAmatriceManipulateur = new CmatriceManipulateur<double>();
 		
 		char ** ppcBalises;
 		unsigned int uiNbrBalises;
 
-		
-	try
-	{
 		//les balises principales à trouver dans le fichier
 		uiNbrBalises = 4;
 		ppcBalises = new char *[uiNbrBalises];
@@ -40,129 +36,33 @@ void main(int argc, char * argv[])
 		if(argc <= 1)
 			throw(Cexception(0, "Pas de parametres"));
 
-		//On récupère les matrices
-		for(uiCmptr = 1; uiCmptr < (unsigned int)argc; uiCmptr++)
-		{
-			pPARparseur->PARLire(argv[uiCmptr]);
-			if(ppdMATListeMatrice == nullptr)
-			{
-				ppdMATListeMatrice = (Cmatrice<double> **)malloc(sizeof(Cmatrice<double> *));
-				if(ppdMATListeMatrice == nullptr)
-					throw Cexception(ERREUR_ALLOCATION, "Dans la fonction main");
-			}
-			else 
-			{
-				ppdMATListeMatrice = (Cmatrice<double> **)realloc(ppdMATListeMatrice, sizeof(Cmatrice<double> *) * (uiNbrMatrice + 1));
-				if(ppdMATListeMatrice == nullptr)
-					throw Cexception(ERREUR_REALLOCATION, "Dans la fonction main");
-			}
-			pMGRmatriceGenerateur->MGRsetParseur(pPARparseur);
-			ppdMATListeMatrice[uiNbrMatrice] = pMGRmatriceGenerateur->MGRgenererMatrice();
-			uiNbrMatrice++;
-		}
+		//On récupère la matrice
+		pPARparseur->PARLire(argv[1]);
+		pMGRmatriceGenerateur->MGRsetParseur(pPARparseur);
+		pdMATMatrice = pMGRmatriceGenerateur->MGRgenererMatrice();
 
 	
-		//On demande à l'utilisateur de rentrer un nombre
-		cout << "Entrez une valeur : " << endl;
-		while(!(cin >> dValeur))
-		{
-			cerr << "Erreur de saisie, ressaisissez une valeur valide (nombre reel)" << endl;
-            cin.clear();  
-            cin.ignore( numeric_limits<streamsize>::max(), '\n' );
-		}
-		cout << endl;
-	
-		//On multiplie chaque matrice par cette valeur
-		cout << "Multiplication de toutes les matrices par " << dValeur << " :\n\n";
-		for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
-		{
-			(dValeur * *(ppdMATListeMatrice[uiCmptr])).MTMATAfficherMatrice();
-			cout << endl;
-		}
-	
-		//On divise chaque matrice par cette valeur
-		cout << "Division de toutes les matrices par " << dValeur << " :\n\n";
-		for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
-		{
-			(*(ppdMATListeMatrice[uiCmptr]) / dValeur).MTMATAfficherMatrice();
-			cout << endl;
-		}
+		//affichage matrices rentrées
+		cout << "Affichage matrices" << endl;
+		pdMATMatrice->MTMATAfficherMatrice();
+
+		//echelonnage matrices
+		cout << "echelonnage matrices" << endl;
+		pdMATtemp = new Cmatrice<double>(pMMAmatriceManipulateur->MTMATEchelonnageMatrice(pdMATMatrice));
+		pdMATtemp->MTMATAfficherMatrice();
+		free(pdMATtemp);
+		//Calcul rang matrices
+		cout << "calcul rangs matrices" << endl;
+		cout << pMMAmatriceManipulateur->MTMATCalculRang(pdMATMatrice) << endl;
+
+
+
+		//On libère la mémoire allouée
+		free(pdMATMatrice);
 	}
 	catch(Cexception EXCexception)
 	{
 		//Dans le cas d'une levé d'exception on l'attrape et on la lit
-		cout << "Erreur " ;
-		cout << EXCexception.EXCLire_Valeur() << " : " ;
-		cout << EXCexception.EXCLire_Message() << endl;
+		cout << "Erreur " << EXCexception.EXCLire_Valeur() << " : " << EXCexception.EXCLire_Message() << endl;
 	}
-	
-	try
-	{
-		//On addition toute les matrices entre elles
-		if(uiNbrMatrice != 0)
-			pdMATTemp = new Cmatrice<double>(*ppdMATListeMatrice[0]);
-		for(uiCmptr = 1; uiCmptr < uiNbrMatrice; uiCmptr++)
-			*pdMATTemp = *pdMATTemp + *ppdMATListeMatrice[uiCmptr];
-		cout << "Resultat de l'addition de toutes les matrice entre elles : \n" << endl;
-		pdMATTemp->MTMATAfficherMatrice();
-		
-	}
-	catch(Cexception EXCexception)
-	{
-		//Dans le cas d'une levé d'exception on l'attrape et on la lit
-		cout << "Erreur " ;
-		cout << EXCexception.EXCLire_Valeur() << " : " ;
-		cout << EXCexception.EXCLire_Message() << endl;
-	}
-
-	try
-	{
-		//On alterne addition et soustraction entre toute les matrices
-		if(uiNbrMatrice != 0)
-			*pdMATTemp = *ppdMATListeMatrice[0];
-		for(uiCmptr = 1; uiCmptr < uiNbrMatrice; uiCmptr++)
-		{
-			if(uiCmptr % 2 == 0)
-				*pdMATTemp = *pdMATTemp + *ppdMATListeMatrice[uiCmptr];
-			else
-				*pdMATTemp = *pdMATTemp - *ppdMATListeMatrice[uiCmptr];
-		}
-		cout << "Resultat de la soustraction alternee avec la soustraction des matrice entre elles : \n" << endl;
-		pdMATTemp->MTMATAfficherMatrice();
-		
-	}
-	catch(Cexception EXCexception)
-	{
-		//Dans le cas d'une levé d'exception on l'attrape et on la lit
-		cout << "Erreur " ;
-		cout << EXCexception.EXCLire_Valeur() << " : " ;
-		cout << EXCexception.EXCLire_Message() << endl;
-	}
-
-	try
-	{
-		//On multiplie toute les matrices entre elles
-		if(uiNbrMatrice != 0)
-			*pdMATTemp = *ppdMATListeMatrice[0];
-		for(uiCmptr = 1; uiCmptr < uiNbrMatrice; uiCmptr++)
-			*pdMATTemp = *pdMATTemp * *ppdMATListeMatrice[uiCmptr];
-		cout << "Resultat de la multiplication de toutes les matrice entre elles : \n" << endl;
-		pdMATTemp->MTMATAfficherMatrice();
-		
-	}
-	catch(Cexception EXCexception)
-	{
-		//Dans le cas d'une levé d'exception on l'attrape et on la lit
-		cout << "Erreur " ;
-		cout << EXCexception.EXCLire_Valeur() << " : " ;
-		cout << EXCexception.EXCLire_Message() << endl;
-	}
-
-	//On libère la mémoire allouée
-	for(uiCmptr = 0; uiCmptr < uiNbrMatrice; uiCmptr++)
-		delete ppdMATListeMatrice[uiCmptr];
-	free(ppdMATListeMatrice);
-	delete pdMATTemp;
-
-	this_thread::sleep_for(chrono::seconds(5));
 }
