@@ -40,15 +40,16 @@ template<class MType> Cmatrice<MType> & CmatriceManipulateur<MType>::MTMAMTransp
 /************************************************************************************************************************************************************
 MTMATEchelonnageMatrice
 *************************************************************************************************************************************************************
-	Entrée : Rien
-	Necessité : Néant
+	Entrée : Un pointeur sur un objet de type Cmatrice<MType>
+	Necessité : Pointeur non null
 	Sortie : référence sur un objet de type CMatrice<MType>
 	Entraine : Retourne la matrice echelonnée
 ************************************************************************************************************************************************************/
-template<class MType> Cmatrice<MType> & CmatriceManipulateur<MType>::MTMATEchelonnageMatrice(Cmatrice<MType> * pMTMATmatrice) const
+template<class MType> Cmatrice<MType> & CmatriceManipulateur<MType>::MTMAMEchelonnageMatrice(Cmatrice<MType> * pMTMATmatrice) const
 {
 	MType ** ppMTmatrice;
 	unsigned int uiNbLignes, uiNbColonnes;
+	Cmatrice<MType> * MTMATmatrice = nullptr;
 	//compteurs de parcours de la matrice pour les différents calculs
 	unsigned int uiCompteurLignes, uiCompteurColonnes; 	
 	unsigned int uiCompteurColonnesInterne;
@@ -118,25 +119,30 @@ template<class MType> Cmatrice<MType> & CmatriceManipulateur<MType>::MTMATEchelo
 
 	}
 
-	return * new Cmatrice<MType>(ppMTmatrice, uiNbLignes, uiNbColonnes);
-}
+	MTMATmatrice = new Cmatrice<MType>(ppMTmatrice, uiNbLignes, uiNbColonnes);
 
+	for(uiCompteurColonnes = 0; uiCompteurColonnes < uiNbColonnes; uiCompteurColonnes++)
+		delete ppMTmatrice[uiCompteurColonnes];
+	delete ppMTmatrice;
+
+	return * MTMATmatrice;
+}
 
 /************************************************************************************************************************************************************
 MTMATCalculRang
 *************************************************************************************************************************************************************
-	Entrée : Rien
-	Necessité : matrice echelonnée en parametre
-	Sortie : Rang de la matrice echelonnée
-	Entraine : Néant
+	Entrée : Un pointeur sur un objet de type Cmatrice<MType>
+	Necessité : Pointeur non null
+	Sortie : Naturel, rang de la matrice passé en paramètre
+	Entraine : Le rang a été calculé et retourné
 ************************************************************************************************************************************************************/
-template<class MType> unsigned int CmatriceManipulateur<MType>::MTMATCalculRang(Cmatrice<MType> * pMTMATmatrice)
+template<class MType> unsigned int CmatriceManipulateur<MType>::MTMAMCalculRang(Cmatrice<MType> * pMTMATmatrice)
 {
 	unsigned int uiRang=0;
 	unsigned int uiCompteurLignes, uiCompteurColonnes; 
 	bool bLigneVide;
 
-	Cmatrice<MType> MTMATtemp = MTMATEchelonnageMatrice(pMTMATmatrice);
+	Cmatrice<MType> MTMATtemp = MTMAMEchelonnageMatrice(pMTMATmatrice);
 	
 	for(uiCompteurLignes = 0; uiCompteurLignes < MTMATtemp.MTMATgetNbLignes(); uiCompteurLignes++)
 	{

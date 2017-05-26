@@ -5,8 +5,7 @@
 class Cmatrice<class MType>
 *******************************************************************************
 
-	Ce Canvas de classe permet de généré une matrice de type générique et de
-	faire des manipulations sur en entre matrices.
+	Ce Canvas de classe permet de généré une matrice de type générique
 
 	Attributs
 		uiMATnbLignes : Le nombre de lignes de la matrice

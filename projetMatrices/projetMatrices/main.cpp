@@ -11,8 +11,10 @@ void main(int argc, char * argv[])
 {
 	try
 	{
+		
 		argc = 2;
 		argv[1] = "matrice.txt";
+		
 
 		Cmatrice<double> * pdMATMatrice = nullptr;
 		Cmatrice<double> * pdMATtemp = nullptr;
@@ -22,6 +24,7 @@ void main(int argc, char * argv[])
 		
 		char ** ppcBalises;
 		unsigned int uiNbrBalises;
+		unsigned int uiCompteur;
 
 		//les balises principales à trouver dans le fichier
 		uiNbrBalises = 4;
@@ -35,30 +38,40 @@ void main(int argc, char * argv[])
 		//Si il n'y a aucune matrice on s'arrête là
 		if(argc <= 1)
 			throw(Cexception(0, "Pas de parametres"));
+		//Si il y a plus d'une matrice en paramètre on le signal mais on continu
+		if(argc > 2)
+			cout << "Attention seule la première matrice passée en paramètre sera utilisee" << endl << endl;
 
 		//On récupère la matrice
 		pPARparseur->PARLire(argv[1]);
 		pMGRmatriceGenerateur->MGRsetParseur(pPARparseur);
 		pdMATMatrice = pMGRmatriceGenerateur->MGRgenererMatrice();
 
-	
 		//affichage matrices rentrées
-		cout << "Affichage matrices" << endl;
+		cout << "La matrice lue est :" << endl << endl;
 		pdMATMatrice->MTMATAfficherMatrice();
+		cout << endl;
 
-		//echelonnage matrices
-		cout << "echelonnage matrices" << endl;
-		pdMATtemp = new Cmatrice<double>(pMMAmatriceManipulateur->MTMATEchelonnageMatrice(pdMATMatrice));
+		//affichage de la matrice échelonnée
+		cout << "Echelonnee cette matrice devient :" << endl << endl;
+		pdMATtemp = & pMMAmatriceManipulateur->MTMAMEchelonnageMatrice(pdMATMatrice);
 		pdMATtemp->MTMATAfficherMatrice();
 		free(pdMATtemp);
-		//Calcul rang matrices
-		cout << "calcul rangs matrices" << endl;
-		cout << pMMAmatriceManipulateur->MTMATCalculRang(pdMATMatrice) << endl;
+		cout << endl;
 
+		//Calcul rang matrices
+		cout << "Ainsi son rang est : ";
+		cout << pMMAmatriceManipulateur->MTMAMCalculRang(pdMATMatrice) << endl;
 
 
 		//On libère la mémoire allouée
 		free(pdMATMatrice);
+		delete pMGRmatriceGenerateur;
+		delete pMMAmatriceManipulateur;
+		delete pPARparseur;
+		for(uiCompteur = 0; uiCompteur < uiNbrBalises; uiCompteur++)
+			free(ppcBalises[uiCompteur]);
+		delete ppcBalises;
 	}
 	catch(Cexception EXCexception)
 	{
